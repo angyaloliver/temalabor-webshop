@@ -4,4 +4,5 @@ import webshop.model.Product;
 
 public interface ProductRepository {
     public void save(Product p);
+    public Product findbyName(String name);
 }
