@@ -16,12 +16,12 @@ public class Product {
     private Collection<ProductImage> images;
     private Collection<ProductCategory> categories;
 
-    Product(int id, String n, int numb, String desc, ProductPrice pp) {
+    Product(int id, String name, int number, String description, ProductPrice productPrice) {
         this.id = id;
-        this.name = n;
-        this.numberInStock = numb;
-        this.description = desc;
-        this.price = pp;
+        this.name = name;
+        this.numberInStock = number;
+        this.description = description;
+        this.price = productPrice;
     }
 
     public static Product createNewProduct(String name, int number, String description, ProductPrice pp) {

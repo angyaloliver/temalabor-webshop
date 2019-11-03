@@ -5,7 +5,7 @@ import webshop.model.Product;
 public interface ProductRepository {
     void save(Product p);
 
-    Product findbyName(String name);
+    Product findbyId(int id);
 
     boolean existsbyName(String name);
 

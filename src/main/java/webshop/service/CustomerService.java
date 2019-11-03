@@ -21,7 +21,7 @@ public class CustomerService {
         customerRepository.delete(c);
     }
 
-    void changeContact(CustomerContact customerContact, int customerId){
+    void changeContact(int customerId, CustomerContact customerContact){
         Customer c = customerRepository.findbyId(customerId);
         c.setContact(customerContact);
         customerRepository.save(c);

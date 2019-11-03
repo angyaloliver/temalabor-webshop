@@ -22,8 +22,8 @@ public class OrderService {
         customerResponsitory.save(c);
     }
 
-    void changeStatus(OrderStatus orderStatus, String name) {
-        Order o = orderRepository.findbyName(name);
+    void changeStatus(int id, OrderStatus orderStatus) {
+        Order o = orderRepository.findbyId(id);
         o.setStatus(orderStatus);
         orderRepository.save(o);
     }

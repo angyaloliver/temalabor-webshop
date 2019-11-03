@@ -18,13 +18,13 @@ public class ProductService {
         }
     }
 
-    void deleteProduct(String name) {
-        Product p = productRepository.findbyName(name);
+    void deleteProduct(int id) {
+        Product p = productRepository.findbyId(id);
         productRepository.delete(p);
     }
 
-    void changeNumberInStock(int number, String name) { //Add new items (+) or buy some (-)
-        Product p = productRepository.findbyName(name);
+    void changeNumberInStock(int id, int number) { //Add new items (+) or buy some (-)
+        Product p = productRepository.findbyId(id);
         p.setNumberInStock(p.getNumberInStock() + number);
         productRepository.save(p);
     }

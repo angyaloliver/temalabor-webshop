@@ -15,8 +15,8 @@ public class ShoppingCartService {
     CustomerRepository customerRepository;
 
 
-    void addProductToCart(String productName, int customerId) {
-        Product p = productRepository.findbyName(productName);
+    void addProductToCart(int id, int customerId) {
+        Product p = productRepository.findbyId(id);
         Customer u = customerRepository.findbyId(customerId);
         ShoppingCart sc = u.getShoppingCart();
 
