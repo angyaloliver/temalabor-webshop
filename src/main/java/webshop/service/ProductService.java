@@ -11,11 +11,8 @@ public class ProductService {
     ProductRepository productRepository;
 
     void addProduct(String name, int number, String description, ProductPrice price) {
-        if (productRepository.existsbyName(name)) {
-            Product p = Product.createNewProduct(name, number, description, price);
-
-            productRepository.save(p);
-        }
+        Product p = Product.createNewProduct(name, number, description, price);
+        productRepository.save(p);
     }
 
     void deleteProduct(int id) {

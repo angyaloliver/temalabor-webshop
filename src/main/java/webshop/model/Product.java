@@ -25,7 +25,7 @@ public class Product {
     }
 
     public static Product createNewProduct(String name, int number, String description, ProductPrice pp) {
-        int nextId = 0; //create random id, what was unused before TODO
+        int nextId = 0; //create id, what was unused before TODO
         return new Product(nextId, name, number, description, pp);
     }
 }

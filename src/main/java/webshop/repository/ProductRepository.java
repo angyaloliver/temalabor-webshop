@@ -7,7 +7,5 @@ public interface ProductRepository {
 
     Product findbyId(int id);
 
-    boolean existsbyName(String name);
-
     void delete(Product p);
 }
