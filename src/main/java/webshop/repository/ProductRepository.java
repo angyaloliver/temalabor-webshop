@@ -3,6 +3,9 @@ package webshop.repository;
 import webshop.model.Product;
 
 public interface ProductRepository {
-    public void save(Product p);
-    public Product findbyName(String name);
+    void save(Product p);
+
+    Product findbyId(int id);
+
+    void delete(Product p);
 }
