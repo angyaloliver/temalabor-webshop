@@ -3,6 +3,7 @@ package webshop.repository;
 import webshop.model.Order;
 
 public interface OrderRepository {
-    public void save(Order o);
-    public Order findbyName(String name);
+    void save(Order o);
+
+    Order findbyName(String name);
 }
