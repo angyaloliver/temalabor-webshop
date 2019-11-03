@@ -9,7 +9,7 @@ import webshop.repository.CustomerRepository;
 
 public class CustomerService {
 
-    CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
 
     void addCustomer(CustomerContact cc){
         Customer c = Customer.createNewWithId(cc);

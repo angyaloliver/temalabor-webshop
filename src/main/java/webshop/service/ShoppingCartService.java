@@ -10,12 +10,12 @@ import webshop.model.ShoppingCart;
 
 public class ShoppingCartService {
 
-    ProductRepository productRepository;
-    ShoppingCartRepository shoppingCartRepository;
-    CustomerRepository customerRepository;
+    private ProductRepository productRepository;
+    private ShoppingCartRepository shoppingCartRepository;
+    private CustomerRepository customerRepository;
 
 
-    void addProductToCart(int id, int customerId) {
+    public void addProductToCart(int id, int customerId) {
         Product p = productRepository.findbyId(id);
         Customer u = customerRepository.findbyId(customerId);
         ShoppingCart sc = u.getShoppingCart();

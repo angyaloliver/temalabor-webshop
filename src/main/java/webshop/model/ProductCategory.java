@@ -1,5 +1,5 @@
 package webshop.model;
 
 public class ProductCategory {
-    String name;
+    private String name;
 }

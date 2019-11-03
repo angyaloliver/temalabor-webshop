@@ -8,11 +8,11 @@ import webshop.repository.CustomerRepository;
 
 public class OrderService {
 
-    OrderRepository orderRepository;
-    ShoppingCartRepository shoppingCartRepository;
-    CustomerRepository customerResponsitory;
+    private OrderRepository orderRepository;
+    private ShoppingCartRepository shoppingCartRepository;
+    private CustomerRepository customerResponsitory;
 
-    void addOrder(int customerId, Delivery delivery, PaymentMethod paymentMethod) {
+    public void addOrder(int customerId, Delivery delivery, PaymentMethod paymentMethod) {
         Customer c = customerResponsitory.findbyId(customerId);
         Order o = Order.createNewOrder(c.getShoppingCart(), c, delivery, paymentMethod);
 
@@ -22,7 +22,7 @@ public class OrderService {
         customerResponsitory.save(c);
     }
 
-    void changeStatus(int id, OrderStatus orderStatus) {
+    public void changeStatus(int id, OrderStatus orderStatus) {
         Order o = orderRepository.findbyId(id);
         o.setStatus(orderStatus);
         orderRepository.save(o);

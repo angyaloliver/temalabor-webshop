@@ -13,7 +13,7 @@ public class Customer {
     private Collection<Order> orders;
     private CustomerContact contact;
 
-    Customer(int id, CustomerContact cc) {
+    public Customer(int id, CustomerContact cc) {
         this.id = id;
         this.contact = cc;
     }

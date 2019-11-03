@@ -16,7 +16,7 @@ public class Product {
     private Collection<ProductImage> images;
     private Collection<ProductCategory> categories;
 
-    Product(int id, String name, int number, String description, ProductPrice productPrice) {
+    public Product(int id, String name, int number, String description, ProductPrice productPrice) {
         this.id = id;
         this.name = name;
         this.numberInStock = number;
