@@ -12,7 +12,7 @@ public class CustomerService {
     CustomerRepository customerRepository;
 
     void addCustomer(CustomerContact cc){
-        Customer c = Customer.createWithNewId(cc);
+        Customer c = Customer.createNewWithId(cc);
         customerRepository.save(c);
     }
 

@@ -18,8 +18,8 @@ public class Customer {
         this.contact = cc;
     }
 
-    public static Customer createWithNewId(CustomerContact cc) {
-        int nextId = 0; //create random id, what was unused before TODO
+    public static Customer createNewWithId(CustomerContact cc) {
+        int nextId = 0; //create id, what was unused before TODO
         return new Customer(nextId, cc);
     }
 
