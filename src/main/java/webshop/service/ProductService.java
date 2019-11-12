@@ -8,21 +8,21 @@ import webshop.repository.ProductRepository;
 
 public class ProductService {
 
-    private ProductRepository productRepository;
+  private ProductRepository productRepository;
 
-    public void addProduct(String name, int number, String description, ProductPrice price) {
-        Product p = Product.createNewProduct(name, number, description, price);
-        productRepository.save(p);
-    }
+  public void addProduct(String name, int number, String description, ProductPrice price) {
+    Product p = Product.createNewProduct(name, number, description, price);
+    productRepository.save(p);
+  }
 
-    public void deleteProduct(int id) {
-        Product p = productRepository.findbyId(id);
-        productRepository.delete(p);
-    }
+  public void deleteProduct(int id) {
+    Product p = productRepository.findbyId(id);
+    productRepository.delete(p);
+  }
 
-    public void changeNumberInStock(int id, int number) { //Add new items (+) or buy some (-)
-        Product p = productRepository.findbyId(id);
-        p.setNumberInStock(p.getNumberInStock() + number);
-        productRepository.save(p);
-    }
+  public void changeNumberInStock(int id, int number) { //Add new items (+) or buy some (-)
+    Product p = productRepository.findbyId(id);
+    p.setNumberInStock(p.getNumberInStock() + number);
+    productRepository.save(p);
+  }
 }

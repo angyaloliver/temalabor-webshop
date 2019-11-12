@@ -10,20 +10,20 @@ import webshop.model.ShoppingCart;
 
 public class ShoppingCartService {
 
-    private ProductRepository productRepository;
-    private ShoppingCartRepository shoppingCartRepository;
-    private CustomerRepository customerRepository;
+  private ProductRepository productRepository;
+  private ShoppingCartRepository shoppingCartRepository;
+  private CustomerRepository customerRepository;
 
 
-    public void addProductToCart(int id, int customerId) {
-        Product p = productRepository.findbyId(id);
-        Customer u = customerRepository.findbyId(customerId);
-        ShoppingCart sc = u.getShoppingCart();
+  public void addProductToCart(int id, int customerId) {
+    Product p = productRepository.findbyId(id);
+    Customer u = customerRepository.findbyId(customerId);
+    ShoppingCart sc = u.getShoppingCart();
 
-        sc.addProduct(p);
+    sc.addProduct(p);
 
-        shoppingCartRepository.save(sc);
-        customerRepository.save(u);
-    }
+    shoppingCartRepository.save(sc);
+    customerRepository.save(u);
+  }
 
 }

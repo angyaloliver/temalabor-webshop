@@ -8,24 +8,26 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Product {
-    private int id;
-    private String name;
-    private int numberInStock;
-    private String description;
-    private ProductPrice price;
-    private Collection<ProductImage> images;
-    private Collection<ProductCategory> categories;
 
-    public Product(int id, String name, int number, String description, ProductPrice productPrice) {
-        this.id = id;
-        this.name = name;
-        this.numberInStock = number;
-        this.description = description;
-        this.price = productPrice;
-    }
+  private int id;
+  private String name;
+  private int numberInStock;
+  private String description;
+  private ProductPrice price;
+  private Collection<ProductImage> images;
+  private Collection<ProductCategory> categories;
 
-    public static Product createNewProduct(String name, int number, String description, ProductPrice pp) {
-        int nextId = 0; //create id, what was unused before TODO
-        return new Product(nextId, name, number, description, pp);
-    }
+  public Product(int id, String name, int number, String description, ProductPrice productPrice) {
+    this.id = id;
+    this.name = name;
+    this.numberInStock = number;
+    this.description = description;
+    this.price = productPrice;
+  }
+
+  public static Product createNewProduct(String name, int number, String description,
+      ProductPrice pp) {
+    int nextId = 0; //create id, what was unused before TODO
+    return new Product(nextId, name, number, description, pp);
+  }
 }
