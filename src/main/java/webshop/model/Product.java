@@ -1,33 +1,46 @@
 package webshop.model;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Entity
 public class Product {
 
-  private int id;
+  @Id
+  @GeneratedValue
+  private Integer id;
   private String name;
   private int numberInStock;
   private String description;
-  private ProductPrice price;
+  private Price originalPrice;
+
+  @Setter(AccessLevel.NONE)
+  private Price reducedPrice;
+  private BigDecimal discountRate;
   private Collection<ProductImage> images;
   private Collection<ProductCategory> categories;
 
-  public Product(int id, String name, int number, String description, ProductPrice productPrice) {
-    this.id = id;
+  public Product(String name, int number, String description, Price originalPrice) {
     this.name = name;
     this.numberInStock = number;
     this.description = description;
-    this.price = productPrice;
+    this.originalPrice = originalPrice;
+    this.reducedPrice = originalPrice;
+    this.discountRate = BigDecimal.valueOf(1.0);
   }
 
-  public static Product createNewProduct(String name, int number, String description,
-      ProductPrice pp) {
-    int nextId = 0; //create id, what was unused before TODO
-    return new Product(nextId, name, number, description, pp);
+  public void discount(){
+    reducedPrice.setNet(originalPrice.getNet().multiply(discountRate));
+    reducedPrice.setGross(originalPrice.getGross().multiply(discountRate));
   }
+
 }
