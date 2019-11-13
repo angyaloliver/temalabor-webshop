@@ -1,31 +1,31 @@
 package webshop.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import webshop.model.*;
 
 import webshop.repository.OrderRepository;
 import webshop.repository.ShoppingCartRepository;
 import webshop.repository.CustomerRepository;
 
+@Service
 public class OrderService {
 
+  @Autowired
   private OrderRepository orderRepository;
+
+  @Autowired
   private ShoppingCartRepository shoppingCartRepository;
-  private CustomerRepository customerResponsitory;
+
+  @Autowired
+  private CustomerRepository customerRepository;
 
   public void addOrder(int customerId, Delivery delivery, PaymentMethod paymentMethod) {
-    Customer c = customerResponsitory.findbyId(customerId);
-    Order o = Order.createNewOrder(c.getShoppingCart(), c, delivery, paymentMethod);
 
-    c.deleteShoppingCart();
-
-    orderRepository.save(o);
-    customerResponsitory.save(c);
   }
 
   public void changeStatus(int id, OrderStatus orderStatus) {
-    Order o = orderRepository.findbyId(id);
-    o.setStatus(orderStatus);
-    orderRepository.save(o);
+
   }
 
 }

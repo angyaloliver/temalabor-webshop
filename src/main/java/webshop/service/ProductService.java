@@ -1,13 +1,17 @@
 package webshop.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import webshop.model.Product;
 import webshop.model.ProductPrice;
 
 
 import webshop.repository.ProductRepository;
 
+@Service
 public class ProductService {
 
+  @Autowired
   private ProductRepository productRepository;
 
   public void addProduct(String name, int number, String description, ProductPrice price) {
@@ -16,13 +20,10 @@ public class ProductService {
   }
 
   public void deleteProduct(int id) {
-    Product p = productRepository.findbyId(id);
-    productRepository.delete(p);
+
   }
 
-  public void changeNumberInStock(int id, int number) { //Add new items (+) or buy some (-)
-    Product p = productRepository.findbyId(id);
-    p.setNumberInStock(p.getNumberInStock() + number);
-    productRepository.save(p);
+  public void changeNumberInStock(int id, int number) {
+
   }
 }
