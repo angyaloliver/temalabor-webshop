@@ -1,12 +1,8 @@
 package webshop.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import webshop.model.Product;
 
-public interface ProductRepository {
+public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-  void save(Product p);
-
-  Product findbyId(int id);
-
-  void delete(Product p);
 }
