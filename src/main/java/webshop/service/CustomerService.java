@@ -15,8 +15,7 @@ public class CustomerService {
   private CustomerRepository customerRepository;
 
   void addCustomer(CustomerContact cc) {
-    Customer c = Customer.createNewWithId(cc);
-    customerRepository.save(c);
+
   }
 
   void deleteCustomer(int customerId) {

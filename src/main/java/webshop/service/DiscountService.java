@@ -1,5 +1,6 @@
 package webshop.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +22,13 @@ public class DiscountService {
   ProductCategoryRepository productCategoryRepository;
 
   @Transactional
-  public void discountProductsInCategory(String categoryName, int percent) {
+  public void discountProductsInCategory(String categoryName, BigDecimal discountRate) {
 
     List<ProductCategory> categories = productCategoryRepository.findByName(categoryName);
 
     for (ProductCategory productCategory : categories) {
       for (Product product : productCategory.getProducts()) {
-        product.discount();
+        product.discount(discountRate);
       }
     }
   }
