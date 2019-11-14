@@ -2,31 +2,43 @@ package webshop.model;
 
 import java.util.Collection;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Entity
 public class Customer {
 
-  private int id;
+  @Id
+  @GeneratedValue
+  private Integer id;
+
+  @OneToOne
   private ShoppingCart shoppingCart;
+
+  @OneToMany
   private Collection<Order> orders;
+
+  @OneToOne
   private CustomerContact contact;
 
-  public Customer(int id, CustomerContact cc) {
-    this.id = id;
+  public Customer() {
+
+  }
+
+  public Customer(CustomerContact cc) {
     this.contact = cc;
   }
 
-  public static Customer createNewWithId(CustomerContact cc) {
-    int nextId = 0; //create id, what was unused before TODO
-    return new Customer(nextId, cc);
+  public void addOrder(Order o) {
   }
 
-  public void addOrder(Order o) {
-  } //add order to collection of orders
-
   public void deleteShoppingCart() {
-  } //delete the element from shopping cart, because they are an order now
+  }
 }
