@@ -23,7 +23,7 @@ public class Customer {
   private ShoppingCart shoppingCart;
 
   @OneToMany
-  private Collection<Order> orders;
+  private Collection<OrderDetails> orderDetails;
 
   @OneToOne
   private CustomerContact contact;
@@ -36,7 +36,7 @@ public class Customer {
     this.contact = cc;
   }
 
-  public void addOrder(Order o) {
+  public void addOrder(OrderDetails o) {
   }
 
   public void deleteShoppingCart() {

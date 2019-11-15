@@ -17,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Order {
+public class OrderDetails {
 
   @Id
   @GeneratedValue
@@ -40,11 +40,11 @@ public class Order {
   @Enumerated(EnumType.STRING)
   private PaymentMethod paymentMethod;
 
-  public Order() {
+  public OrderDetails() {
   }
 
-  public Order(int id, LocalDateTime orderDateTime, ShoppingCart shoppingCart, Customer customer,
-      Delivery delivery, OrderStatus status, PaymentMethod paymentMethod) {
+  public OrderDetails(int id, LocalDateTime orderDateTime, ShoppingCart shoppingCart, Customer customer,
+                      Delivery delivery, OrderStatus status, PaymentMethod paymentMethod) {
     this.id = id;
     this.orderDateTime = orderDateTime;
     this.shoppingCart = shoppingCart;

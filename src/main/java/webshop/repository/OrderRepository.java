@@ -1,8 +1,8 @@
 package webshop.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import webshop.model.Order;
+import webshop.model.OrderDetails;
 
-public interface OrderRepository extends JpaRepository<Order, Integer> {
+public interface OrderRepository extends JpaRepository<OrderDetails, Integer> {
 
 }

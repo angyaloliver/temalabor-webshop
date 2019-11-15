@@ -1,10 +1,8 @@
 package webshop.model;
 
 import java.util.Collection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,8 +15,14 @@ public class ShoppingCart {
   @GeneratedValue
   private Integer id;
 
+  @OneToOne
+  private Customer customer;
+
   @OneToMany
   private Collection<Product> products;
+
+  @OneToOne
+  private OrderDetails orderDetails;
 
   public void addProduct(Product p) {
 

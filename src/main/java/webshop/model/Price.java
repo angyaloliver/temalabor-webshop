@@ -5,6 +5,8 @@ import java.util.Currency;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +23,9 @@ public class Price {
   private BigDecimal gross;
   private BigDecimal tax;
   private Currency currency;
+
+  @OneToOne
+  private Product product;
 
   public Price() {
 

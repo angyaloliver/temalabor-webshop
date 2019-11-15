@@ -2,9 +2,8 @@ package webshop.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import webshop.model.Customer;
 import webshop.model.CustomerContact;
-import webshop.model.Order;
+import webshop.model.OrderDetails;
 
 import webshop.repository.CustomerRepository;
 
@@ -26,7 +25,7 @@ public class CustomerService {
 
   }
 
-  void addOrder(Order order, int customerId) {
+  void addOrder(OrderDetails orderDetails, int customerId) {
 
   }
 }

@@ -26,6 +26,9 @@ public class CustomerContact {
   private Collection<Address> billingAddresses;
 
   @OneToOne
+  private Customer customer;
+
+  @OneToOne
   private CustomerName name;
   private String phoneNumber;
 
