@@ -1,6 +1,8 @@
 package webshop.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
 import org.assertj.core.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
@@ -35,8 +37,7 @@ public class ShoppingCartServiceTest {
   @Test
   public void testAddOneProductToShoppingCart() {
     Integer productId = 1221;
-    Price price = new Price(new BigDecimal("2500"), new BigDecimal("0.27"));
-    Product product = new Product(productId, "Sample Product", price);
+    Product product = sampleProductWithId(productId);
 
     Integer shoppingCartId = 3223;
     ShoppingCart shoppingCart = new ShoppingCart();
@@ -60,12 +61,10 @@ public class ShoppingCartServiceTest {
   @Test
   public void testAddMultipleProductsToShoppingCart() {
     Integer productId1 = 1221;
-    Price price1 = new Price(new BigDecimal("2500"), new BigDecimal("0.27"));
-    Product product1 = new Product(productId1, "Sample Product 1", price1);
+    Product product1 = sampleProductWithId(productId1);
 
-    int productId2 = 3333;
-    Price price2 = new Price(new BigDecimal("3000"), new BigDecimal("0.27"));
-    Product product2 = new Product(productId1, "Sample Product 2", price2);
+    Integer productId2 = 3333;
+    Product product2 = sampleProductWithId(productId2);
 
     Integer shoppingCartId = 3223;
     ShoppingCart shoppingCart = new ShoppingCart();
@@ -87,5 +86,40 @@ public class ShoppingCartServiceTest {
     Assert.assertEquals(2, shoppingCart.getProducts().size());
     Assert
         .assertArrayEquals(Arrays.array(product1, product2), shoppingCart.getProducts().toArray());
+  }
+
+  @Test
+  public void testRemoveOneProductFromShoppingCart() {
+
+    Integer productId = 1234;
+    Product product = sampleProductWithId(productId);
+    Collection<Product> products = new ArrayList<>();
+    products.add(product);
+
+    Integer shoppingCartId = 5555;
+    ShoppingCart shoppingCart = new ShoppingCart();
+    shoppingCart.setProducts(products);
+
+    Integer customerId = 4321;
+    Customer customer = new Customer();
+    customer.setId(customerId);
+    customer.setShoppingCart(shoppingCart);
+
+    Mockito.when(shoppingCartRepository.getOne(shoppingCartId)).thenReturn(shoppingCart);
+    Mockito.when(productRepository.getOne(productId)).thenReturn(product);
+    Mockito.when(customerRepository.getOne(customerId)).thenReturn(customer);
+
+    shoppingCartService.removeProductFromCart(productId, customerId);
+
+    Assert.assertTrue(shoppingCart.getProducts().isEmpty());
+  }
+
+  private Product sampleProductWithId(Integer id) {
+    return Product.builder()
+        .id(id)
+        .name("Sample Product")
+        .description("Sample description")
+        .originalPrice(new Price(new BigDecimal("2500"), new BigDecimal("0.27")))
+        .build();
   }
 }

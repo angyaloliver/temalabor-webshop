@@ -2,17 +2,26 @@ package webshop.model;
 
 import java.math.BigDecimal;
 import java.util.Collection;
-
-import javax.persistence.*;
-
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-public class Product { //TODO apply Builder pattern
+@Builder
+@AllArgsConstructor
+public class Product {
 
   @Id
   @GeneratedValue

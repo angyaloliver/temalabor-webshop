@@ -24,4 +24,8 @@ public class ShoppingCart {
   public void addProduct(Product p) {
     products.add(p);
   }
+
+  public void removeProduct(Product productToRemove) {
+    products.clear();
+  }
 }

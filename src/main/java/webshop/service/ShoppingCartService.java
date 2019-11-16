@@ -28,4 +28,11 @@ public class ShoppingCartService {
     shoppingCart.addProduct(product);
   }
 
+  public void removeProductFromCart(int productId, int customerId) {
+    ShoppingCart shoppingCart = customerRepository.getOne(customerId).getShoppingCart();
+    Product product = productRepository.getOne(productId);
+
+    shoppingCart.removeProduct(product);
+  }
+
 }
