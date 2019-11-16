@@ -1,8 +1,8 @@
 package webshop.service;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
 import static org.hamcrest.Matchers.closeTo;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -34,9 +34,9 @@ public class DiscountServiceTest {
 
     ProductCategory productCategory = new ProductCategory("ABC");
     Product product1 = new Product(1, "Product 1",
-        new Price(BigDecimal.valueOf(100.0), BigDecimal.valueOf(1.27)));
+        new Price(BigDecimal.valueOf(100.0), BigDecimal.valueOf(0.27)));
     Product product2 = new Product(2, "Product2",
-        new Price(BigDecimal.valueOf(200.0), BigDecimal.valueOf(1.19)));
+        new Price(BigDecimal.valueOf(200.0), BigDecimal.valueOf(0.19)));
     productCategory.addProduct(product1);
     productCategory.addProduct(product2);
 

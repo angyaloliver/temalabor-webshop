@@ -4,8 +4,6 @@ import static org.hamcrest.Matchers.closeTo;
 import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
-
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +11,9 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-
 import webshop.model.Price;
-import webshop.model.ProductCategory;
 import webshop.model.Product;
+import webshop.model.ProductCategory;
 import webshop.repository.ProductCategoryRepository;
 import webshop.repository.ProductRepository;
 
@@ -39,9 +36,9 @@ public class DiscountServiceIT {
   public void testDiscountProductsInCategory() throws Exception {
 
     Product product1 = new Product(1, "Product 1",
-        new Price(BigDecimal.valueOf(100.0), BigDecimal.valueOf(1.27)));
+        new Price(BigDecimal.valueOf(100.0), BigDecimal.valueOf(0.27)));
     Product product2 = new Product(2, "Product2",
-        new Price(BigDecimal.valueOf(200.0), BigDecimal.valueOf(1.19)));
+        new Price(BigDecimal.valueOf(200.0), BigDecimal.valueOf(0.19)));
     product1 = productRepository.save(product1);
     product2 = productRepository.save(product2);
 

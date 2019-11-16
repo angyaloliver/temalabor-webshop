@@ -2,8 +2,9 @@ package webshop.model;
 
 import java.math.BigDecimal;
 import java.util.Currency;
-import javax.persistence.*;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,17 +19,17 @@ public class Price {
 
   private BigDecimal net;
   private BigDecimal gross;
-  private BigDecimal tax;
+  private BigDecimal taxRate;
   private Currency currency;
 
   public Price() {
 
   }
 
-  public Price(BigDecimal net, BigDecimal tax) {
+  public Price(BigDecimal net, BigDecimal taxRate) {
     this.net = net;
-    this.tax = tax;
-    this.gross = net.multiply(tax);
+    this.taxRate = taxRate;
+    this.gross = net.multiply(BigDecimal.ONE.add(taxRate));
   }
 
 }
