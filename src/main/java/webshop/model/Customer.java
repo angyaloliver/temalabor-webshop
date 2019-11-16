@@ -2,11 +2,8 @@ package webshop.model;
 
 import java.util.Collection;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +19,7 @@ public class Customer {
   @OneToOne
   private ShoppingCart shoppingCart;
 
-  @OneToMany
+  @OneToMany(mappedBy = "customer")
   private Collection<OrderDetails> orderDetails;
 
   @OneToOne

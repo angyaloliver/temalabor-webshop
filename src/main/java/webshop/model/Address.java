@@ -1,9 +1,6 @@
 package webshop.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +15,5 @@ public class Address {
   private Integer id;
   private String address;
 
-  @OneToOne
-  private Delivery delivery;
   //...
 }

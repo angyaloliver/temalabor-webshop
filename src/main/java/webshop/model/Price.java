@@ -2,10 +2,7 @@ package webshop.model;
 
 import java.math.BigDecimal;
 import java.util.Currency;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,9 +20,6 @@ public class Price {
   private BigDecimal gross;
   private BigDecimal tax;
   private Currency currency;
-
-  @OneToOne
-  private Product product;
 
   public Price() {
 

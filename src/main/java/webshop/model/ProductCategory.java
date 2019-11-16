@@ -20,7 +20,7 @@ public class ProductCategory {
 
   private String name;
 
-  @OneToMany
+  @OneToMany(mappedBy = "productCategory")
   private Set<Product> products;
 
   public ProductCategory() {

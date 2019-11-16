@@ -3,13 +3,8 @@ package webshop.model;
 import java.math.BigDecimal;
 import java.util.Collection;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +22,7 @@ public class Product { //TODO apply Builder pattern
   private int numberInStock;
   private String description;
 
-  @OneToOne(cascade = {CascadeType.ALL}) //quick Stackoverflow fix, don't know what it does, but makes DiscountServiceIT pass
+  @OneToOne(cascade = {CascadeType.ALL})
   private Price originalPrice;
 
   @Setter(AccessLevel.NONE)
@@ -40,6 +35,7 @@ public class Product { //TODO apply Builder pattern
   private Collection<ProductImage> images;
 
   @ManyToOne
+  @JoinColumn(name = "product_category_id")
   private ProductCategory productCategory; //for testing purposes
 
   @OneToMany

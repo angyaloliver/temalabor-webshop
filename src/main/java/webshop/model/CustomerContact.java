@@ -2,13 +2,8 @@ package webshop.model;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,10 +21,8 @@ public class CustomerContact {
   private Collection<Address> billingAddresses;
 
   @OneToOne
-  private Customer customer;
-
-  @OneToOne
   private CustomerName name;
+
   private String phoneNumber;
 
   private LocalDateTime registrationDateTime;

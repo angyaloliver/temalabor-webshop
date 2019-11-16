@@ -2,15 +2,8 @@ package webshop.model;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,6 +22,7 @@ public class OrderDetails {
   private ShoppingCart shoppingCart;
 
   @ManyToOne
+  @JoinColumn(name = "customer_id")
   private Customer customer;
 
   @OneToOne
