@@ -1,6 +1,7 @@
 package webshop.service;
 
 import java.math.BigDecimal;
+import org.assertj.core.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,7 +53,39 @@ public class ShoppingCartServiceTest {
 
     shoppingCartService.addProductToCart(productId, customerId);
 
-    Assert.assertEquals(shoppingCart.getProducts().size(), 1);
-    Assert.assertEquals(shoppingCart.getProducts().iterator().next().getId(), productId);
+    Assert.assertEquals(1, shoppingCart.getProducts().size());
+    Assert.assertEquals(productId, shoppingCart.getProducts().iterator().next().getId());
+  }
+
+  @Test
+  public void testAddMultipleProductsToShoppingCart() {
+    Integer productId1 = 1221;
+    Price price1 = new Price(new BigDecimal("2500"), new BigDecimal("0.27"));
+    Product product1 = new Product(productId1, "Sample Product 1", price1);
+
+    int productId2 = 3333;
+    Price price2 = new Price(new BigDecimal("3000"), new BigDecimal("0.27"));
+    Product product2 = new Product(productId1, "Sample Product 2", price2);
+
+    Integer shoppingCartId = 3223;
+    ShoppingCart shoppingCart = new ShoppingCart();
+    shoppingCart.setId(shoppingCartId);
+
+    int customerId = 4321;
+    Customer customer = new Customer();
+    customer.setId(customerId);
+    customer.setShoppingCart(shoppingCart);
+
+    Mockito.when(shoppingCartRepository.getOne(shoppingCartId)).thenReturn(shoppingCart);
+    Mockito.when(productRepository.getOne(productId1)).thenReturn(product1);
+    Mockito.when(productRepository.getOne(productId2)).thenReturn(product2);
+    Mockito.when(customerRepository.getOne(customerId)).thenReturn(customer);
+
+    shoppingCartService.addProductToCart(productId1, customerId);
+    shoppingCartService.addProductToCart(productId2, customerId);
+
+    Assert.assertEquals(2, shoppingCart.getProducts().size());
+    Assert
+        .assertArrayEquals(Arrays.array(product1, product2), shoppingCart.getProducts().toArray());
   }
 }
