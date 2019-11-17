@@ -30,6 +30,10 @@ public class CustomerService {
     return customerRepository.findAll();
   }
 
+  public Customer getCustomerByEmail(String email) {
+    return customerRepository.findByContact_EmailAddress(email);
+  }
+
   public void changeContact(int customerId, CustomerContact customerContact) {
 
   }
@@ -38,7 +42,4 @@ public class CustomerService {
 
   }
 
-  void addOrder(OrderDetails orderDetails, int customerId) {
-
-  }
 }
