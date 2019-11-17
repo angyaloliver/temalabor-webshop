@@ -20,9 +20,6 @@ public class CustomerName {
   private String firstName;
   private String lastName;
 
-  @ElementCollection(targetClass = Prefix.class)
-  private Collection<Prefix> prefixes;
-
   public CustomerName(String firstName, String lastName) {
     this.firstName = firstName;
     this.lastName = lastName;
