@@ -20,12 +20,22 @@ public class OrderService {
   @Autowired
   private CustomerRepository customerRepository;
 
-  public void addOrder(int customerId, Delivery delivery, PaymentMethod paymentMethod) {
+  public void createOrder(int customerId, Delivery delivery, PaymentMethod paymentMethod) {
+    Customer customer = customerRepository.getOne(customerId);
+    OrderDetails order = new OrderDetails(customer.getShoppingCart(), customer, delivery, paymentMethod);
 
+    customer.addOrder(order);
+    customer.deleteShoppingCart();
+
+    orderRepository.save(order);
+    customerRepository.save(customer);
   }
 
-  public void changeStatus(int id, OrderStatus orderStatus) {
+  public void changeOrderStatus(int orderId, OrderStatus orderStatus) {
+    OrderDetails order = orderRepository.getOne(orderId);
+    order.setStatus(orderStatus);
 
+    orderRepository.save(order);
   }
 
 }

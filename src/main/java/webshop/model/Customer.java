@@ -30,7 +30,6 @@ public class Customer {
   private CustomerContact contact;
 
   public Customer() {
-
   }
 
   public Customer(CustomerContact cc) {
@@ -42,5 +41,10 @@ public class Customer {
   }
 
   public void deleteShoppingCart() {
+    shoppingCart.removeAll();
+  }
+
+  public int numberOfOrders(){
+    return orderDetails.size();
   }
 }

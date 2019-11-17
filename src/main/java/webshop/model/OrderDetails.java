@@ -46,15 +46,13 @@ public class OrderDetails {
   public OrderDetails() {
   }
 
-  public OrderDetails(int id, LocalDateTime orderDateTime, ShoppingCart shoppingCart,
-      Customer customer,
-      Delivery delivery, OrderStatus status, PaymentMethod paymentMethod) {
-    this.id = id;
-    this.orderDateTime = orderDateTime;
+  public OrderDetails(ShoppingCart shoppingCart, Customer customer,
+                        Delivery delivery, PaymentMethod paymentMethod) {
+    this.orderDateTime = LocalDateTime.now();
     this.shoppingCart = shoppingCart;
     this.customer = customer;
     this.delivery = delivery;
-    this.status = status;
+    this.status = OrderStatus.Processing;
     this.paymentMethod = paymentMethod;
   }
 }
