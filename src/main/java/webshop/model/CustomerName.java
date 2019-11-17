@@ -20,9 +20,6 @@ public class CustomerName {
   private String firstName;
   private String lastName;
 
-  @OneToOne
-  private CustomerContact customerContact;
-
   @ElementCollection(targetClass = Prefix.class)
   private Collection<Prefix> prefixes;
 
