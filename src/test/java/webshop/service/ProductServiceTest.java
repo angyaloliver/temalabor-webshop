@@ -3,6 +3,7 @@ package webshop.service;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,6 +45,7 @@ public class ProductServiceTest {
     Assert.assertEquals(newQuantity, productService.getProductById(productId).getNumberInStock());
   }
 
+  @Test
   public void testModifyProduct() {
     Integer productToBeModifiedId = 9999;
     Integer modifyingProductId = 1111;
@@ -59,6 +61,7 @@ public class ProductServiceTest {
         .id(modifyingProductId)
         .name("ModifiedProduct")
         .description("This product has been modified.")
+        .productCategories(new HashSet<>())
         .numberInStock(5)
         .build();
 
@@ -70,8 +73,7 @@ public class ProductServiceTest {
     Assert.assertEquals("This product has been modified.",
         productService.getProductById(9999).getDescription());
     Assert.assertEquals(5, productService.getProductById(9999).getNumberInStock());
-    Assert.assertEquals(new Price(new BigDecimal("2500"), new BigDecimal("0.27")),
-        productService.getProductById(9999).getOriginalPrice());
+    Assert.assertNull(productService.getProductById(9999).getOriginalPrice());
     Assert.assertEquals(Collections.EMPTY_SET, productService.getProductById(9999).getProductCategories());
   }
 }
