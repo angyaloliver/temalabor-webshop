@@ -41,8 +41,11 @@ public class CustomerService {
     customerRepository.save(customer);
   }
 
-  public void addOrder(OrderDetails orderDetails, int customerId) {
+  public void addOrder(int customerId, OrderDetails orderDetails) {
+    Customer customer = customerRepository.getOne(customerId);
+    customer.addOrder(orderDetails);
 
+    customerRepository.save(customer);
   }
 
 }

@@ -1,6 +1,8 @@
 package webshop.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +25,7 @@ public class Customer {
   private ShoppingCart shoppingCart = new ShoppingCart();
 
   @OneToMany(mappedBy = "customer")
-  private Collection<OrderDetails> orderDetails;
+  private Collection<OrderDetails> orderDetails = new ArrayList<>();
 
   @OneToOne(cascade = {CascadeType.ALL})
   private CustomerContact contact;
@@ -37,6 +39,7 @@ public class Customer {
   }
 
   public void addOrder(OrderDetails o) {
+    orderDetails = Collections.singleton(o);
   }
 
   public void deleteShoppingCart() {

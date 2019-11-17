@@ -13,6 +13,10 @@ import webshop.model.Address;
 import webshop.model.Customer;
 import webshop.model.CustomerContact;
 import webshop.model.CustomerName;
+import webshop.model.Delivery;
+import webshop.model.OrderDetails;
+import webshop.model.OrderStatus;
+import webshop.model.PaymentMethod;
 import webshop.repository.CustomerRepository;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -72,6 +76,34 @@ public class CustomerServiceTest {
         customer.getContact().getName().getLastName());
 
     Assert.assertEquals(newPhoneNumber, customer.getContact().getPhoneNumber());
+  }
+
+  @Test
+  public void testAddOneOrder() {
+    Integer customerId = 1111;
+    Integer orderId = 7879;
+
+    LocalDateTime dateTime = LocalDateTime.now();
+
+    Customer customer = new Customer();
+    customer.setId(customerId);
+
+    OrderDetails orderDetails = OrderDetails.builder()
+        .id(orderId)
+        .orderDateTime(dateTime)
+        .customer(customer)
+        .delivery(new Delivery())
+        .shoppingCart(customer.getShoppingCart())
+        .paymentMethod(PaymentMethod.Simple)
+        .status(OrderStatus.Processing)
+        .build();
+
+    Mockito.when(customerRepository.getOne(customerId)).thenReturn(customer);
+
+    customerService.addOrder(customerId, orderDetails);
+
+    Assert.assertEquals(1, customer.getOrderDetails().size());
+    Assert.assertEquals(orderDetails, customer.getOrderDetails().iterator().next());
   }
 
 }

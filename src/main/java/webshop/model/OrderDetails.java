@@ -1,15 +1,24 @@
 package webshop.model;
 
 import java.time.LocalDateTime;
-
-import javax.persistence.*;
-
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@Builder
+@AllArgsConstructor
 public class OrderDetails {
 
   @Id
@@ -37,8 +46,9 @@ public class OrderDetails {
   public OrderDetails() {
   }
 
-  public OrderDetails(int id, LocalDateTime orderDateTime, ShoppingCart shoppingCart, Customer customer,
-                      Delivery delivery, OrderStatus status, PaymentMethod paymentMethod) {
+  public OrderDetails(int id, LocalDateTime orderDateTime, ShoppingCart shoppingCart,
+      Customer customer,
+      Delivery delivery, OrderStatus status, PaymentMethod paymentMethod) {
     this.id = id;
     this.orderDateTime = orderDateTime;
     this.shoppingCart = shoppingCart;
