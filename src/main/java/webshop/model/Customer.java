@@ -2,7 +2,6 @@ package webshop.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,7 +38,7 @@ public class Customer {
   }
 
   public void addOrder(OrderDetails o) {
-    orderDetails = Collections.singleton(o);
+    orderDetails.add(o);
   }
 
   public void deleteShoppingCart() {

@@ -2,6 +2,7 @@ package webshop.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import org.assertj.core.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -104,6 +105,49 @@ public class CustomerServiceTest {
 
     Assert.assertEquals(1, customer.getOrderDetails().size());
     Assert.assertEquals(orderDetails, customer.getOrderDetails().iterator().next());
+  }
+
+  @Test
+  public void testAddMultipleOrders() {
+    Integer customerId = 1111;
+
+    Integer orderId1 = 7879;
+    Integer orderId2 = 3212;
+
+    LocalDateTime dateTime1 = LocalDateTime.now();
+    LocalDateTime dateTime2 = LocalDateTime.now().minusDays(3L);
+
+    Customer customer = new Customer();
+    customer.setId(customerId);
+
+    OrderDetails orderDetails1 = OrderDetails.builder()
+        .id(orderId1)
+        .orderDateTime(dateTime1)
+        .customer(customer)
+        .delivery(new Delivery())
+        .shoppingCart(customer.getShoppingCart())
+        .paymentMethod(PaymentMethod.Simple)
+        .status(OrderStatus.Processing)
+        .build();
+
+    OrderDetails orderDetails2 = OrderDetails.builder()
+        .id(orderId2)
+        .orderDateTime(dateTime2)
+        .customer(customer)
+        .delivery(new Delivery())
+        .shoppingCart(customer.getShoppingCart())
+        .paymentMethod(PaymentMethod.PayPal)
+        .status(OrderStatus.Deliverd)
+        .build();
+
+    Mockito.when(customerRepository.getOne(customerId)).thenReturn(customer);
+
+    customerService.addOrder(customerId, orderDetails1);
+    customerService.addOrder(customerId, orderDetails2);
+
+    Assert.assertEquals(2, customer.getOrderDetails().size());
+    Assert.assertArrayEquals(Arrays.array(orderDetails1, orderDetails2),
+        customer.getOrderDetails().toArray());
   }
 
 }
