@@ -1,9 +1,12 @@
 package webshop.model;
 
 import java.util.Collection;
-
-import javax.persistence.*;
-
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,13 +19,13 @@ public class Customer {
   @GeneratedValue
   private Integer id;
 
-  @OneToOne
-  private ShoppingCart shoppingCart;
+  @OneToOne(cascade = {CascadeType.ALL})
+  private ShoppingCart shoppingCart = new ShoppingCart();
 
   @OneToMany(mappedBy = "customer")
   private Collection<OrderDetails> orderDetails;
 
-  @OneToOne
+  @OneToOne(cascade = {CascadeType.ALL})
   private CustomerContact contact;
 
   public Customer() {
