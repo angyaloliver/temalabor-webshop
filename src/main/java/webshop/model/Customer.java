@@ -40,10 +40,6 @@ public class Customer {
     orderDetails.add(o);
   }
 
-  public void deleteShoppingCart() {
-    shoppingCart.removeAll();
-  }
-
   public int numberOfOrders(){
     return orderDetails.size();
   }

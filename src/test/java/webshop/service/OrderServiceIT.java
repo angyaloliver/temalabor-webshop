@@ -12,7 +12,7 @@ import webshop.repository.CustomerRepository;
 import webshop.repository.OrderRepository;
 
 @RunWith(MockitoJUnitRunner.class)
-public class OrderServiceTest {
+public class OrderServiceIT {
 
   @InjectMocks
   OrderService orderService;
@@ -25,9 +25,14 @@ public class OrderServiceTest {
 
   @Test
   public void testCreateOrder() {
+    Integer productId = 111;
+    Product product = new Product();
+    product.setId(productId);
+
     Integer shoppingCartId = 333;
     ShoppingCart shoppingCart = new ShoppingCart();
     shoppingCart.setId(shoppingCartId);
+    shoppingCart.addProduct(product);
 
     Integer customerId = 666;
     Customer customer = new Customer();
@@ -39,26 +44,16 @@ public class OrderServiceTest {
 
     Mockito.when(customerRepository.getOne(customerId)).thenReturn(customer);
 
-    Assert.assertEquals(customer.numberOfOrders(), 0);
+    Assert.assertEquals(product, customer.getShoppingCart().getProducts().iterator().next());
 
     orderService.createOrder(customerId, 1234, delivery, paymentMethod);
 
-    Assert.assertEquals(customer.numberOfOrders(), 1);
-  }
+    ShoppingCart orderShoppingCart = customer.getOrderDetails().iterator().next().getShoppingCart();
 
-  @Test
-  public void testChangeOrderStatus() {
-    int orderId = 666;
-    OrderDetails order= new OrderDetails();
-    order.setId(orderId);
-    order.setStatus(OrderStatus.Processing);
+    Assert.assertEquals(shoppingCart, orderShoppingCart);
+    Assert.assertEquals(false, orderShoppingCart.getProducts().isEmpty());
+    Assert.assertTrue(customer.getShoppingCart().getProducts().isEmpty());
 
-    OrderStatus newStatus = OrderStatus.Deliverd;
 
-    Mockito.when(orderRepository.getOne(orderId)).thenReturn(order);
-
-    orderService.changeOrderStatus(orderId, newStatus);
-
-    Assert.assertEquals(order.getStatus(), newStatus);
   }
 }
