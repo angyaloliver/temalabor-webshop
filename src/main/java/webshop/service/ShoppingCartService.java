@@ -26,6 +26,7 @@ public class ShoppingCartService {
     Product product = productRepository.getOne(productId);
 
     shoppingCart.addProduct(product);
+    shoppingCartRepository.save(shoppingCart);
   }
 
   public void removeProductFromCart(int productId, int customerId) {
@@ -33,6 +34,7 @@ public class ShoppingCartService {
     Product product = productRepository.getOne(productId);
 
     shoppingCart.removeProduct(product);
+    shoppingCartRepository.save(shoppingCart);
   }
 
 }

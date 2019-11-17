@@ -48,7 +48,6 @@ public class ShoppingCartServiceTest {
     customer.setId(customerId);
     customer.setShoppingCart(shoppingCart);
 
-    Mockito.when(shoppingCartRepository.getOne(shoppingCartId)).thenReturn(shoppingCart);
     Mockito.when(productRepository.getOne(productId)).thenReturn(product);
     Mockito.when(customerRepository.getOne(customerId)).thenReturn(customer);
 
@@ -75,7 +74,6 @@ public class ShoppingCartServiceTest {
     customer.setId(customerId);
     customer.setShoppingCart(shoppingCart);
 
-    Mockito.when(shoppingCartRepository.getOne(shoppingCartId)).thenReturn(shoppingCart);
     Mockito.when(productRepository.getOne(productId1)).thenReturn(product1);
     Mockito.when(productRepository.getOne(productId2)).thenReturn(product2);
     Mockito.when(customerRepository.getOne(customerId)).thenReturn(customer);
@@ -105,13 +103,48 @@ public class ShoppingCartServiceTest {
     customer.setId(customerId);
     customer.setShoppingCart(shoppingCart);
 
-    Mockito.when(shoppingCartRepository.getOne(shoppingCartId)).thenReturn(shoppingCart);
     Mockito.when(productRepository.getOne(productId)).thenReturn(product);
     Mockito.when(customerRepository.getOne(customerId)).thenReturn(customer);
 
     shoppingCartService.removeProductFromCart(productId, customerId);
 
     Assert.assertTrue(shoppingCart.getProducts().isEmpty());
+  }
+
+  @Test
+  public void testRemovalOfMultipleProductsFromShoppingCart() {
+    Integer productId1 = 1111;
+    Product product1 = sampleProductWithId(productId1);
+
+    Integer productId2 = 2222;
+    Product product2 = sampleProductWithId(productId2);
+
+    Integer productId3 = 3333;
+    Product product3 = sampleProductWithId(productId3);
+
+    Collection<Product> products = new ArrayList<>();
+    products.add(product1);
+    products.add(product2);
+    products.add(product3);
+
+    Integer shoppingCartId = 5555;
+    ShoppingCart shoppingCart = new ShoppingCart();
+    shoppingCart.setProducts(products);
+
+    int customerId = 4321;
+    Customer customer = new Customer();
+    customer.setId(customerId);
+    customer.setShoppingCart(shoppingCart);
+
+    Mockito.when(productRepository.getOne(productId1)).thenReturn(product1);
+    Mockito.when(productRepository.getOne(productId2)).thenReturn(product2);
+    Mockito.when(customerRepository.getOne(customerId)).thenReturn(customer);
+
+    shoppingCartService.removeProductFromCart(productId1, customerId);
+    shoppingCartService.removeProductFromCart(productId2, customerId);
+
+    Assert.assertEquals(1, shoppingCart.getProducts().size());
+    Assert.assertArrayEquals(Arrays.array(product3), shoppingCart.getProducts().toArray());
   }
 
   private Product sampleProductWithId(Integer id) {
