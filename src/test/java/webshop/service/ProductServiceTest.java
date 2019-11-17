@@ -1,6 +1,8 @@
 package webshop.service;
 
 import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.Collections;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -62,12 +64,14 @@ public class ProductServiceTest {
 
     Mockito.when(productRepository.getOne(productToBeModifiedId)).thenReturn(productToBeModified);
 
-    productService.modifyProduct(modifyingProductId, modifyingProduct);
+    productService.modifyProduct(productToBeModifiedId, modifyingProduct);
 
     Assert.assertEquals("ModifiedProduct", productService.getProductById(9999).getName());
-    Assert.assertEquals("This product has been modified.", productService.getProductById(9999).getDescription());
+    Assert.assertEquals("This product has been modified.",
+        productService.getProductById(9999).getDescription());
     Assert.assertEquals(5, productService.getProductById(9999).getNumberInStock());
     Assert.assertEquals(new Price(new BigDecimal("2500"), new BigDecimal("0.27")),
         productService.getProductById(9999).getOriginalPrice());
+    Assert.assertEquals(Collections.EMPTY_SET, productService.getProductById(9999).getProductCategories());
   }
 }
