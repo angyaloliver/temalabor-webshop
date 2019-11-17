@@ -1,8 +1,11 @@
 package webshop.model;
 
 import java.util.Collection;
-import javax.persistence.*;
-
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,4 +25,9 @@ public class CustomerName {
 
   @ElementCollection(targetClass = Prefix.class)
   private Collection<Prefix> prefixes;
+
+  public CustomerName(String firstName, String lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
 }

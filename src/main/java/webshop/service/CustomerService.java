@@ -35,7 +35,10 @@ public class CustomerService {
   }
 
   public void changeContact(int customerId, CustomerContact customerContact) {
+    Customer customer = customerRepository.getOne(customerId);
+    customer.setContact(customerContact);
 
+    customerRepository.save(customer);
   }
 
   public void addOrder(OrderDetails orderDetails, int customerId) {
