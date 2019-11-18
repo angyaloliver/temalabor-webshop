@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Singular;
 
 @Getter
 @Setter
@@ -22,7 +23,7 @@ public class ProductCategory {
   private String name;
 
   @OneToMany(mappedBy = "productCategory")
-  private Collection<Product> products;
+  private Collection<Product> products = new HashSet<>();
 
   public ProductCategory() {
   }
@@ -30,15 +31,6 @@ public class ProductCategory {
   public ProductCategory(String name) {
     super();
     this.name = name;
-    this.products = new HashSet<>();
-  }
-
-
-  public ProductCategory(Integer id, String name) {
-    super();
-    this.id = id;
-    this.name = name;
-    this.products = new HashSet<>();
   }
 
   public void addProduct(Product product) {
