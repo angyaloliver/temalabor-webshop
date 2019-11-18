@@ -6,7 +6,6 @@ import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.HashSet;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +16,6 @@ import webshop.model.Price;
 import webshop.model.Product;
 import webshop.model.ProductCategory;
 import webshop.repository.ProductCategoryRepository;
-import webshop.repository.ProductRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DiscountServiceTest {
@@ -27,9 +25,6 @@ public class DiscountServiceTest {
 
   @Mock
   ProductCategoryRepository categoryRepository;
-
-  @Mock
-  ProductRepository productRepository;
 
   @Test
   public void testDiscountProductsInCategory() {
@@ -41,7 +36,6 @@ public class DiscountServiceTest {
         .name("Product 1")
         .originalPrice(new Price(BigDecimal.valueOf(100.0), BigDecimal.valueOf(0.27)))
         .build();
-
 
     Product product2 = Product.builder()
         .id(2)

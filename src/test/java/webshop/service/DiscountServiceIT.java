@@ -4,7 +4,7 @@ import static org.hamcrest.Matchers.closeTo;
 import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,11 +59,15 @@ public class DiscountServiceIT {
     BigDecimal delta = BigDecimal.valueOf(0.0001);
     assertThat(product1.getOriginalPrice().getGross(), closeTo(BigDecimal.valueOf(127.0), delta));
     assertThat(product2.getOriginalPrice().getNet(), closeTo(BigDecimal.valueOf(200.0), delta));
+    Assert.assertNull(product1.getReducedPrice());
+    Assert.assertNull(product2.getReducedPrice());
 
     discountService.discountProductsInCategory("ABC", BigDecimal.valueOf(0.8));
 
-    assertThat(product1.getOriginalPrice().getGross(), closeTo(BigDecimal.valueOf(101.6), delta));
-    assertThat(product2.getOriginalPrice().getNet(), closeTo(BigDecimal.valueOf(160.0), delta));
+    assertThat(product1.getOriginalPrice().getGross(), closeTo(BigDecimal.valueOf(127.0), delta));
+    assertThat(product2.getOriginalPrice().getNet(), closeTo(BigDecimal.valueOf(200.0), delta));
+    assertThat(product1.getReducedPrice().getGross(), closeTo(BigDecimal.valueOf(101.6), delta));
+    assertThat(product2.getReducedPrice().getNet(), closeTo(BigDecimal.valueOf(160.0), delta));
   }
 
 }
