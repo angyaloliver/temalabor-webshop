@@ -33,7 +33,7 @@ public class DiscountServiceIT {
   ProductRepository productRepository;
 
   @Test
-  public void testDiscountProductsInCategory() throws Exception {
+  public void testDiscountProductsInCategory() {
 
     Product product1 = new Product(1, "Product 1",
         new Price(BigDecimal.valueOf(100.0), BigDecimal.valueOf(0.27)));
