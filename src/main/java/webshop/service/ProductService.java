@@ -40,6 +40,17 @@ public class ProductService {
     productRepository.save(product);
   }
 
+  public void modifyProduct(Integer productToBeModifiedId, Product modifyingProduct){
+    Product productToBeModified = productRepository.getOne(productToBeModifiedId);
+    productToBeModified.setName(modifyingProduct.getName());
+    productToBeModified.setDescription(modifyingProduct.getDescription());
+    productToBeModified.setOriginalPrice(modifyingProduct.getOriginalPrice());
+    productToBeModified.setDiscountRate(modifyingProduct.getDiscountRate());
+    productToBeModified.setImages(modifyingProduct.getImages());
+    productToBeModified.setProductCategories(modifyingProduct.getProductCategories());
+    productToBeModified.setNumberInStock(modifyingProduct.getNumberInStock());
+  }
+
     public List<Product> getAllProducts(Integer pageNumber, Integer pageSize, String sortBy) {
       Pageable paging = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy));
 

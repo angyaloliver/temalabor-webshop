@@ -1,5 +1,6 @@
 package webshop.model;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
@@ -21,7 +22,7 @@ public class ProductCategory {
   private String name;
 
   @OneToMany(mappedBy = "productCategory")
-  private Set<Product> products;
+  private Collection<Product> products;
 
   public ProductCategory() {
   }
@@ -29,6 +30,7 @@ public class ProductCategory {
   public ProductCategory(String name) {
     super();
     this.name = name;
+    this.products = new HashSet<>();
   }
 
 
@@ -36,13 +38,11 @@ public class ProductCategory {
     super();
     this.id = id;
     this.name = name;
+    this.products = new HashSet<>();
   }
 
   public void addProduct(Product product) {
-    product.setProductCategory(this);
-    if (this.products == null) {
-      this.products = new HashSet<>();
-    }
+    product.addProductCategory(this);
     this.products.add(product);
   }
 }

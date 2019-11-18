@@ -2,6 +2,7 @@ package webshop.model;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.HashSet;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,12 +44,8 @@ public class Product {
   @OneToMany
   private Collection<ProductImage> images;
 
-  @ManyToOne
-  @JoinColumn(name = "product_category_id")
-  private ProductCategory productCategory; //for testing purposes
-
   @OneToMany
-  private Collection<ProductCategory> categories;
+  private Collection<ProductCategory> productCategories;
 
   public Product() {
   }
@@ -58,6 +55,7 @@ public class Product {
     this.name = name;
     this.originalPrice = originalPrice;
     this.reducedPrice = originalPrice;
+    this.productCategories = new HashSet<>();
   }
 
   public Product(Integer id, String name, int numberInStock, String description,
@@ -70,12 +68,17 @@ public class Product {
     this.originalPrice = originalPrice;
     this.reducedPrice = originalPrice;
     this.discountRate = BigDecimal.valueOf(1.0);
+    this.productCategories = new HashSet<>();
   }
 
   public void discount(BigDecimal discountRate) {
     this.discountRate = discountRate;
     reducedPrice.setNet(originalPrice.getNet().multiply(discountRate));
     reducedPrice.setGross(originalPrice.getGross().multiply(discountRate));
+  }
+
+  public void addProductCategory(ProductCategory productCategory) {
+    productCategories.add(productCategory);
   }
 
 }

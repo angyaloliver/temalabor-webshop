@@ -1,6 +1,9 @@
 package webshop.service;
 
 import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,5 +43,37 @@ public class ProductServiceTest {
     productService.changeNumberInStock(productId, newQuantity);
 
     Assert.assertEquals(newQuantity, productService.getProductById(productId).getNumberInStock());
+  }
+
+  @Test
+  public void testModifyProduct() {
+    Integer productToBeModifiedId = 9999;
+    Integer modifyingProductId = 1111;
+
+    Product productToBeModified = Product.builder()
+        .id(productToBeModifiedId)
+        .name("ProductToBeModified")
+        .description("This product has to be modified.")
+        .originalPrice(new Price(new BigDecimal("2500"), new BigDecimal("0.27")))
+        .build();
+
+    Product modifyingProduct = Product.builder()
+        .id(modifyingProductId)
+        .name("ModifiedProduct")
+        .description("This product has been modified.")
+        .productCategories(new HashSet<>())
+        .numberInStock(5)
+        .build();
+
+    Mockito.when(productRepository.getOne(productToBeModifiedId)).thenReturn(productToBeModified);
+
+    productService.modifyProduct(productToBeModifiedId, modifyingProduct);
+
+    Assert.assertEquals("ModifiedProduct", productService.getProductById(9999).getName());
+    Assert.assertEquals("This product has been modified.",
+        productService.getProductById(9999).getDescription());
+    Assert.assertEquals(5, productService.getProductById(9999).getNumberInStock());
+    Assert.assertNull(productService.getProductById(9999).getOriginalPrice());
+    Assert.assertEquals(Collections.EMPTY_SET, productService.getProductById(9999).getProductCategories());
   }
 }

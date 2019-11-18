@@ -30,7 +30,7 @@ public class DiscountServiceTest {
   ProductRepository productRepository;
 
   @Test
-  public void testDiscountProductsInCategory() throws Exception {
+  public void testDiscountProductsInCategory() {
 
     ProductCategory productCategory = new ProductCategory("ABC");
     Product product1 = new Product(1, "Product 1",

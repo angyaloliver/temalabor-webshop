@@ -24,9 +24,9 @@ public class DiscountService {
   @Transactional
   public void discountProductsInCategory(String categoryName, BigDecimal discountRate) {
 
-    List<ProductCategory> categories = productCategoryRepository.findByName(categoryName);
+    List<ProductCategory> productCategories = productCategoryRepository.findByName(categoryName);
 
-    for (ProductCategory productCategory : categories) {
+    for (ProductCategory productCategory : productCategories) {
       for (Product product : productCategory.getProducts()) {
         product.discount(discountRate);
       }
