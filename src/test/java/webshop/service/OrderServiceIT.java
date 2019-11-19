@@ -10,6 +10,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import webshop.model.*;
 import webshop.repository.CustomerRepository;
 import webshop.repository.OrderRepository;
+import webshop.repository.ProductRepository;
+import webshop.repository.ShoppingCartRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class OrderServiceIT {
@@ -21,6 +23,12 @@ public class OrderServiceIT {
   OrderRepository orderRepository;
 
   @Mock
+  ProductRepository productRepository;
+
+  @Mock
+  ShoppingCartRepository shoppingCartRepository;
+
+  @Mock
   CustomerRepository customerRepository;
 
   @Test
@@ -28,16 +36,19 @@ public class OrderServiceIT {
     Integer productId = 111;
     Product product = new Product();
     product.setId(productId);
+    productRepository.save(product);
 
     Integer shoppingCartId = 333;
     ShoppingCart shoppingCart = new ShoppingCart();
     shoppingCart.setId(shoppingCartId);
     shoppingCart.addProduct(product);
+    shoppingCartRepository.save(shoppingCart);
 
     Integer customerId = 666;
     Customer customer = new Customer();
     customer.setId(customerId);
     customer.setShoppingCart(shoppingCart);
+    customerRepository.save(customer);
 
     Delivery delivery = new Delivery();
     PaymentMethod paymentMethod = PaymentMethod.Simple;
@@ -46,14 +57,13 @@ public class OrderServiceIT {
 
     Assert.assertEquals(product, customer.getShoppingCart().getProducts().iterator().next());
 
-    orderService.createOrder(customerId, 1234, delivery, paymentMethod);
+    orderService.createOrder(customerId, 1234, delivery, paymentMethod, 778);
 
     ShoppingCart orderShoppingCart = customer.getOrderDetails().iterator().next().getShoppingCart();
 
     Assert.assertEquals(shoppingCart, orderShoppingCart);
     Assert.assertEquals(false, orderShoppingCart.getProducts().isEmpty());
     Assert.assertTrue(customer.getShoppingCart().getProducts().isEmpty());
-
-
+    Assert.assertEquals(product, orderShoppingCart.getProducts().iterator().next());
   }
 }

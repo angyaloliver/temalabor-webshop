@@ -28,8 +28,4 @@ public class ShoppingCart {
   public void removeProduct(Product productToRemove) {
     products.removeIf(product -> product.getId().equals(productToRemove.getId()));
   }
-
-  public void removeAll() {
-    products.removeAll(products);
-  }
 }

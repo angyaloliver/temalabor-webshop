@@ -19,7 +19,10 @@ public class OrderService {
   @Autowired
   private CustomerRepository customerRepository;
 
-  public void createOrder(int customerId, int orderId, Delivery delivery, PaymentMethod paymentMethod) {
+  @Autowired
+  private ShoppingCartRepository shoppingCartRepository;
+
+  public void createOrder(int customerId, int orderId, Delivery delivery, PaymentMethod paymentMethod, int shoppingCartIdNew) {
     Customer customer = customerRepository.getOne(customerId);
     OrderDetails order = OrderDetails.builder()
             .id(orderId)
@@ -31,12 +34,14 @@ public class OrderService {
             .status(OrderStatus.Processing)
             .build();
 
+    ShoppingCart shoppingCartNew = new ShoppingCart();
+    shoppingCartNew.setId(shoppingCartIdNew);
+    shoppingCartRepository.save(shoppingCartNew);
+
     customer.addOrder(order);
-    customer.setShoppingCart(new ShoppingCart()); //new empty cart to buy new products
+    customer.setShoppingCart(shoppingCartNew); //new empty cart to buy new products
 
-    System.out.println(order);
     orderRepository.save(order);
-
     customerRepository.save(customer);
   }
 
