@@ -5,7 +5,7 @@ import java.util.HashSet;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +20,7 @@ public class ProductCategory {
 
   private String name;
 
-  @OneToMany(mappedBy = "productCategories")
+  @ManyToMany(mappedBy = "productCategories")
   private Collection<Product> products = new HashSet<>();
 
   public ProductCategory() {

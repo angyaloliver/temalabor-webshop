@@ -7,6 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import lombok.AccessLevel;
@@ -44,7 +46,10 @@ public class Product {
   @Default
   private Collection<ProductImage> images = new HashSet<>();
 
-  @OneToMany
+  @ManyToMany
+  @JoinTable(
+      name = "product_categories"
+  )
   @Default
   private Collection<ProductCategory> productCategories = new HashSet<>();
 

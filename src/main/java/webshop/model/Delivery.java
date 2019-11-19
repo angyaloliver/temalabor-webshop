@@ -1,8 +1,12 @@
 package webshop.model;
 
 import java.time.LocalDateTime;
-import javax.persistence.*;
-
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
