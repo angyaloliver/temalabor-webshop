@@ -40,20 +40,17 @@ public class ProductController {
   }
 
   @GetMapping
-  public List<Product> getAllEmployees(
-          @RequestParam(defaultValue = "0") Integer pageNumber,
-          @RequestParam(defaultValue = "10") Integer pageSize,
-          @RequestParam(defaultValue = "id") String sortBy)
-  {
-    System.out.println("-----------------"+sortBy);
-   return productService.getAllProducts(pageNumber, pageSize, sortBy);
-
+  public List<Product> getPaginatedProducts(
+      @RequestParam(defaultValue = "0") Integer pageNumber,
+      @RequestParam(defaultValue = "10") Integer pageSize,
+      @RequestParam(defaultValue = "id") String sortBy) {
+    return productService.getAllProducts(pageNumber, pageSize, sortBy);
   }
 
- /* @GetMapping
+  @GetMapping("/all")
   public List<Product> getAllProducts() {
     return productService.getAllProducts();
-  }*/
+  }
 
   @PatchMapping("{id}")
   public void changeNumberInStock(
