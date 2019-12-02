@@ -1,5 +1,7 @@
 package webshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashSet;
@@ -11,15 +13,22 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Builder.Default;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
 @Builder
 @AllArgsConstructor
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id")
 public class Product {
 
   @Id
@@ -41,11 +50,11 @@ public class Product {
 
   private BigDecimal discountRate;
 
-  @OneToMany(cascade=CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL)
   @Default
   private Collection<ProductImage> images = new HashSet<>();
 
-  @ManyToMany(cascade=CascadeType.ALL)
+  @ManyToMany(cascade = CascadeType.ALL)
   @JoinTable(
       name = "product_categories"
   )

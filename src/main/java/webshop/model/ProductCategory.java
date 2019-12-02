@@ -1,5 +1,7 @@
 package webshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.util.Collection;
 import java.util.HashSet;
 import javax.persistence.Entity;
@@ -12,6 +14,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id")
 public class ProductCategory {
 
   @Id
