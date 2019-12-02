@@ -40,7 +40,7 @@ public class ProductService {
     productRepository.save(product);
   }
 
-  public void modifyProduct(Integer productToBeModifiedId, Product modifyingProduct){
+  public void modifyProduct(Integer productToBeModifiedId, Product modifyingProduct) {
     Product productToBeModified = productRepository.getOne(productToBeModifiedId);
     productToBeModified.setName(modifyingProduct.getName());
     productToBeModified.setDescription(modifyingProduct.getDescription());
@@ -51,15 +51,15 @@ public class ProductService {
     productToBeModified.setNumberInStock(modifyingProduct.getNumberInStock());
   }
 
-    public List<Product> getAllProducts(Integer pageNumber, Integer pageSize, String sortBy) {
-      Pageable paging = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy));
+  public List<Product> getAllProducts(Integer pageNumber, Integer pageSize, String sortBy) {
+    Pageable paging = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy));
 
-      Page<Product> pagedResult = productRepository.findAll(paging);
+    Page<Product> pagedResult = productRepository.findAll(paging);
 
-      if(pagedResult.hasContent()) {
-        return pagedResult.getContent();
-      } else {
-        return new ArrayList<Product>();
-      }
+    if (pagedResult.hasContent()) {
+      return pagedResult.getContent();
+    } else {
+      return new ArrayList<>();
     }
+  }
 }

@@ -2,11 +2,9 @@ package webshop.service;
 
 import java.math.BigDecimal;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import webshop.model.Product;
 import webshop.model.ProductCategory;
 import webshop.repository.ProductCategoryRepository;
