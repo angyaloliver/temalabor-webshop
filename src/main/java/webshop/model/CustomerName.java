@@ -1,11 +1,8 @@
 package webshop.model;
 
 import java.util.Collection;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,10 +12,14 @@ import lombok.Setter;
 public class CustomerName {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy= GenerationType.AUTO)
   private Integer id;
   private String firstName;
   private String lastName;
+
+  public CustomerName() {
+
+  }
 
   public CustomerName(String firstName, String lastName) {
     this.firstName = firstName;

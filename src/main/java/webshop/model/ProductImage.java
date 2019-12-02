@@ -12,10 +12,19 @@ import lombok.Setter;
 @Entity
 public class ProductImage {
 
-  @Id
-  @GeneratedValue
-  private Integer id;
+    @Id
+    @GeneratedValue
+    private Integer id;
 
-  private String url;
-  private String altText;
+    private String url;
+    private String altText;
+
+    public ProductImage() {
+    }
+
+    public ProductImage(String url, String altText) {
+        this.url = url;
+        this.altText = altText;
+    }
+
 }

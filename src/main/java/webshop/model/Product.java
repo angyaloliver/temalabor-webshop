@@ -11,12 +11,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+
+import lombok.*;
 import lombok.Builder.Default;
-import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @Setter
@@ -29,7 +26,9 @@ public class Product {
   @GeneratedValue
   private Integer id;
 
+  @NonNull
   private String name;
+
   private int numberInStock;
   private String description;
 
@@ -42,11 +41,11 @@ public class Product {
 
   private BigDecimal discountRate;
 
-  @OneToMany
+  @OneToMany(cascade=CascadeType.ALL)
   @Default
   private Collection<ProductImage> images = new HashSet<>();
 
-  @ManyToMany
+  @ManyToMany(cascade=CascadeType.ALL)
   @JoinTable(
       name = "product_categories"
   )

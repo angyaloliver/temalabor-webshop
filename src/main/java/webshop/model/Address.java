@@ -2,6 +2,7 @@ package webshop.model;
 
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,9 +12,15 @@ import lombok.Setter;
 public class Address {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy=GenerationType.AUTO)
   private Integer id;
   private String address;
 
-  //...
+  public Address() {
+  }
+
+  public Address(String address){
+    this.address = address;
+  }
+
 }

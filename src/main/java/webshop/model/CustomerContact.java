@@ -2,38 +2,34 @@ package webshop.model;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.persistence.*;
+
+import lombok.*;
 
 @Getter
 @Setter
 @Entity
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 public class CustomerContact {
 
-  @Id
-  @GeneratedValue
-  private Integer id;
-  private String emailAddress;
 
-  @OneToMany
-  private Collection<Address> billingAddresses;
+    @Id
+    @GeneratedValue
+    private Integer id;
+    @NonNull
+    private String emailAddress;
 
-  @OneToOne
-  private CustomerName name;
+    @OneToMany(cascade = {CascadeType.ALL})
+    private Collection<Address> billingAddresses;
 
-  private String phoneNumber;
+    @OneToOne(cascade = {CascadeType.ALL})
+    private CustomerName name;
 
-  private LocalDateTime registrationDateTime;
+    private String phoneNumber;
 
+    private LocalDateTime registrationDateTime;
+
+    public CustomerContact() {
+    }
 }
