@@ -46,11 +46,6 @@
     </dependency>
 
     <dependency>
-      <artifactId>spring-boot-starter-thymeleaf</artifactId>
-      <groupId>org.springframework.boot</groupId>
-    </dependency>
-
-    <dependency>
       <artifactId>mysql-connector-java</artifactId>
       <groupId>mysql</groupId>
     </dependency>

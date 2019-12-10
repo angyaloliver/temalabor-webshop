@@ -15,13 +15,28 @@ public class Address {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
-  private String address;
+  private String city;
+  private String zip;
+  private String state;
+  private String street;
 
   public Address() {
   }
 
-  public Address(String address) {
-    this.address = address;
+  public Address(String state, String zip, String city, String street) {
+    this.city = city;
+    this.zip = zip;
+    this.state = state;
+    this.street = street;
+  }
+
+  public String getAddress() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(state).append(", ")
+        .append(zip).append(", ")
+        .append(city).append(", ")
+        .append(street);
+    return sb.toString();
   }
 
 }

@@ -52,7 +52,7 @@ public class WebShopApplication implements CommandLineRunner {
     CustomerName customerName = new CustomerName("John", "Doe");
     LocalDateTime time = LocalDateTime.now();
 
-    Address address = new Address("1111 Budapest");
+    Address address = new Address("Hungary", "1111", "Budapest", "Váci street 6.");
 
     List<Address> addressList = new LinkedList<>();
     addressList.add(address);
@@ -96,9 +96,10 @@ public class WebShopApplication implements CommandLineRunner {
         .contact(customerContact)
         .build();
 
-        //customerRepository.save(customer);
+    customerRepository.save(customer);
 
-    Delivery delivery = new Delivery(new Address("Karlsruhe"), DeliveryMethod.DHL);
+    Delivery delivery = new Delivery(
+        new Address("Germany", "76187", "Karlsruhe", "Nancystraße 24."), DeliveryMethod.DHL);
 
     OrderDetails details = OrderDetails.builder()
         .delivery(delivery)
@@ -106,7 +107,7 @@ public class WebShopApplication implements CommandLineRunner {
         .paymentMethod(PaymentMethod.PayPal)
         .build();
 
-        //orderRepository.save(details);
+    //orderRepository.save(details);
 
   }
 

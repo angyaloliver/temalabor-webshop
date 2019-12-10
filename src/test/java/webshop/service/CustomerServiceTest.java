@@ -37,7 +37,10 @@ public class CustomerServiceTest {
     LocalDateTime registrationDate = LocalDateTime.now();
 
     Address address = new Address();
-    address.setAddress("example address");
+    address.setState("Hungary");
+    address.setZip("1111");
+    address.setCity("Budapest");
+    address.setStreet("Irinyi József street 42.");
     ArrayList<Address> addressList = new ArrayList<>();
     addressList.add(address);
 
