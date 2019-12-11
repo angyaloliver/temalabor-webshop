@@ -1,6 +1,9 @@
 package webshop.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import webshop.model.Customer;
@@ -48,6 +51,30 @@ public class OrderService {
     orderRepository.save(order);
     customerRepository.save(customer);
   }
+
+  public void deleteOrder(int orderId) {
+    orderRepository.deleteById(orderId);
+  }
+
+  public OrderDetails getOrderById(Integer id) {
+    return orderRepository.getOne(id);
+  }
+
+  public List<OrderDetails> getAllOrders() {
+    return orderRepository.findAll();
+  }
+
+  public List<OrderDetails> getOneCustomersAllOrders(int customerId) {
+    List<OrderDetails> AllOrders = orderRepository.findAll();
+    List<OrderDetails> OneCustomersAllOrders = new ArrayList<>();
+    for (int i = 0; i < AllOrders.size(); i++) {
+      if(AllOrders.get(i).getCustomer().getId() == customerId){
+        OneCustomersAllOrders.add(AllOrders.get(i));
+      }
+    }
+    return OneCustomersAllOrders;
+  }
+
 
   public void changeOrderStatus(int orderId, OrderStatus orderStatus) {
     OrderDetails order = orderRepository.getOne(orderId);
