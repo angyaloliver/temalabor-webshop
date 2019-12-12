@@ -29,7 +29,9 @@ public class DiscountServiceTest {
   @Test
   public void testDiscountProductsInCategory() {
 
-    ProductCategory productCategory = new ProductCategory("ABC");
+    ProductCategory productCategory = ProductCategory.builder()
+        .name("ABC")
+        .build();
 
     Product product1 = Product.builder()
         .id(1)

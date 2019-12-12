@@ -62,7 +62,10 @@ public class WebShopApplication implements CommandLineRunner {
     ArrayList<ProductImage> images = new ArrayList<>();
     images.add(image);
 
-    ProductCategory category = new ProductCategory("cat7");
+    ProductCategory category = ProductCategory.builder()
+        .name("category")
+        .build();
+
     ArrayList<ProductCategory> categories = new ArrayList<>();
     categories.add(category);
 
@@ -96,7 +99,7 @@ public class WebShopApplication implements CommandLineRunner {
         .contact(customerContact)
         .build();
 
-    customerRepository.save(customer);
+    //customerRepository.save(customer);
 
     Delivery delivery = new Delivery(
         new Address("Germany", "76187", "Karlsruhe", "Nancystraße 24."), DeliveryMethod.DHL);
