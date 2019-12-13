@@ -63,7 +63,7 @@ public class WebShopApplication implements CommandLineRunner {
     images.add(image);
 
     ProductCategory category = ProductCategory.builder()
-        .name("category")
+        .name("category example")
         .build();
 
     ArrayList<ProductCategory> categories = new ArrayList<>();
@@ -76,6 +76,8 @@ public class WebShopApplication implements CommandLineRunner {
         .numberInStock(2)
         .images(images)
         .build();
+
+    product.addProductCategory(category);
 
     productRepository.save(product);
 
