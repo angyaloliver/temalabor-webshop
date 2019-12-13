@@ -12,6 +12,9 @@ import webshop.repository.CustomerRepository;
 import webshop.repository.OrderRepository;
 import webshop.repository.ShoppingCartRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(MockitoJUnitRunner.class)
 public class OrderServiceTest {
 
@@ -67,5 +70,30 @@ public class OrderServiceTest {
     orderService.changeOrderStatus(orderId, newStatus);
 
     Assert.assertEquals(order.getStatus(), newStatus);
+  }
+
+  @Test
+  public void testgetOneCustomersAllOrders() {
+    Integer customerId = 666;
+    Customer customer = new Customer();
+    customer.setId(customerId);
+    customerRepository.save(customer);
+
+    int orderId = 622;
+    OrderDetails order= new OrderDetails();
+    order.setId(orderId);
+    order.setCustomer(customer);
+    orderRepository.save(order);
+
+    List<OrderDetails> orders = new ArrayList<>();
+    orders.add(order);
+
+    Mockito.when(orderRepository.findAll()).thenReturn(orders);
+
+    List<OrderDetails> orders2 = orderService.getOneCustomersAllOrders(customerId);
+
+    Assert.assertEquals(orders2, orders);
+    Assert.assertEquals(orders2.get(0).getCustomer().getId(), customerId);
+
   }
 }
