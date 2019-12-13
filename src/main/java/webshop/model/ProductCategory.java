@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +20,8 @@ import lombok.Setter;
 @JsonIdentityInfo(
     generator = ObjectIdGenerators.PropertyGenerator.class,
     property = "id")
+@Builder
+@AllArgsConstructor
 public class ProductCategory {
 
   @Id
@@ -26,6 +31,7 @@ public class ProductCategory {
   private String name;
 
   @ManyToMany(mappedBy = "productCategories")
+  @Default
   private Collection<Product> products = new HashSet<>();
 
   public ProductCategory() {
