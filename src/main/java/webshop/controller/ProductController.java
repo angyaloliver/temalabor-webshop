@@ -58,4 +58,9 @@ public class ProductController {
       @RequestParam("quantity") Integer quantity) {
     productService.changeNumberInStock(id, quantity);
   }
+
+  @GetMapping("/max_price")
+  public String getMaxPrice() {
+    return Integer.toString(productService.getMaxPrice());
+  }
 }

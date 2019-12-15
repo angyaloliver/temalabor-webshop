@@ -32,4 +32,5 @@ public class Price {
     this.gross = net.multiply(BigDecimal.ONE.add(taxRate));
   }
 
+
 }

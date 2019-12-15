@@ -77,4 +77,11 @@ public class Product {
     productCategories.add(productCategory);
   }
 
+  public BigDecimal getActualPrice() {
+    if (reducedPrice != null) {
+      return reducedPrice.getGross();
+    }
+    return originalPrice.getGross();
+  }
+
 }
