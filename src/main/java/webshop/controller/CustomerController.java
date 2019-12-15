@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import webshop.model.Customer;
 import webshop.model.CustomerContact;
+import webshop.model.ShoppingCart;
 import webshop.service.CustomerService;
 
 @AllArgsConstructor
@@ -42,6 +43,12 @@ public class CustomerController {
   public Customer getCustomerByEmail(
       @PathVariable String email) {
     return customerService.getCustomerByEmail(email);
+  }
+
+  @GetMapping("shopping_cart/{id}")
+  public ShoppingCart getShoppingCart(
+      @PathVariable Integer id) {
+    return customerService.getCustomerById(id).getShoppingCart();
   }
 
   @GetMapping
