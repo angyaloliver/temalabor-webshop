@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import webshop.model.Customer;
 import webshop.model.CustomerContact;
@@ -16,17 +17,18 @@ import webshop.repository.RoleRepository;
 @Service("userDetailsService")
 public class CustomerService implements UserDetailsService {
 
+  BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
   @Autowired
   private CustomerRepository customerRepository;
-
   @Autowired
   private Assembler assembler;
-
   @Autowired
   private RoleRepository roleRepository;
 
+
   public void createCustomer(CustomerContact cc) {
-    cc.setRoles(Arrays.asList(roleRepository.findByName("ROLE_USER")));
+    cc.setPassword(this.bCryptPasswordEncoder.encode(cc.getPassword()));
+    cc.setRoles(Arrays.asList(roleRepository.findByName("ROLE_ADMIN")));
     customerRepository.save(new Customer(cc));
   }
 
