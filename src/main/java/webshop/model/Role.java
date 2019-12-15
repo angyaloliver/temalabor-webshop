@@ -1,0 +1,33 @@
+package webshop.model;
+
+import java.util.Collection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity
+public class Role {
+
+  @Id
+  @GeneratedValue
+  private Integer id;
+
+  private String name;
+
+  @ManyToMany(mappedBy = "roles")
+  private Collection<CustomerContact> customerContacts;
+
+  public Role() {
+    super();
+  }
+
+  public Role(final String name) {
+    super();
+    this.name = name;
+  }
+}
