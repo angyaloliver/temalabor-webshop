@@ -40,6 +40,10 @@ public class CustomerService implements UserDetailsService {
     return customerRepository.getOne(id);
   }
 
+  public Customer getCustomerByUsername(String username) {
+    return customerRepository.findByContact_Username(username);
+  }
+
   public List<Customer> getAllCustomers() {
     return customerRepository.findAll();
   }

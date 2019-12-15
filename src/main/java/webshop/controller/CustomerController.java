@@ -55,4 +55,9 @@ public class CustomerController {
   public List<Customer> getAllCustomers() {
     return customerService.getAllCustomers();
   }
+
+  @GetMapping("get_id/{username}")
+  public int getIdByUsername(@PathVariable String username) {
+    return customerService.getCustomerByUsername(username).getId();
+  }
 }
