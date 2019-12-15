@@ -1,20 +1,32 @@
 package webshop.service;
 
+import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import webshop.model.Customer;
 import webshop.model.CustomerContact;
 import webshop.model.OrderDetails;
 import webshop.repository.CustomerRepository;
+import webshop.repository.RoleRepository;
 
-@Service
-public class CustomerService {
+@Service("userDetailsService")
+public class CustomerService implements UserDetailsService {
 
   @Autowired
   private CustomerRepository customerRepository;
 
+  @Autowired
+  private Assembler assembler;
+
+  @Autowired
+  private RoleRepository roleRepository;
+
   public void createCustomer(CustomerContact cc) {
+    cc.setRoles(Arrays.asList(roleRepository.findByName("ROLE_USER")));
     customerRepository.save(new Customer(cc));
   }
 
@@ -48,4 +60,12 @@ public class CustomerService {
     customerRepository.save(customer);
   }
 
+  public UserDetails loadUserByUsername(String username)
+      throws UsernameNotFoundException {
+    Customer customer = customerRepository.findByContact_Username(username);
+    if (customer == null) {
+      throw new UsernameNotFoundException("User not found.");
+    }
+    return assembler.buildUserFromCustomer(customer);
+  }
 }

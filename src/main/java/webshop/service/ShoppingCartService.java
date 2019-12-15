@@ -1,5 +1,6 @@
 package webshop.service;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import webshop.model.Product;
@@ -35,6 +36,11 @@ public class ShoppingCartService {
 
     shoppingCart.removeProduct(product);
     shoppingCartRepository.save(shoppingCart);
+  }
+
+  public List<Product> getAllProductsInCart(Integer id) {
+    ShoppingCart shoppingCart = shoppingCartRepository.getOne(id);
+    return (List<Product>) shoppingCart.getProducts();
   }
 
 }
