@@ -45,7 +45,7 @@ public class Product {
   private Price originalPrice;
 
   @Setter(AccessLevel.NONE)
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   private Price reducedPrice;
 
   private BigDecimal discountRate;
@@ -69,8 +69,8 @@ public class Product {
     if (reducedPrice == null) {
       reducedPrice = new Price();
     }
-    reducedPrice.setNet(originalPrice.getNet().multiply(discountRate));
-    reducedPrice.setGross(originalPrice.getGross().multiply(discountRate));
+    reducedPrice.setNet(originalPrice.getNet().multiply(BigDecimal.ONE.subtract(discountRate)));
+    reducedPrice.setGross(originalPrice.getGross().multiply(BigDecimal.ONE.subtract(discountRate)));
   }
 
   public void addProductCategory(ProductCategory productCategory) {

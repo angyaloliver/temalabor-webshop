@@ -1,6 +1,9 @@
 package webshop.controller;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +25,11 @@ public class ProductController {
   ProductService productService;
 
   @PostMapping
-  public void createProduct(
+  public Map<String, Integer> createProduct(
       @RequestBody Product product) {
-    productService.createProduct(product);
+    Map<String, Integer> createdProductId = new HashMap<>();
+    createdProductId.put("id", productService.createProduct(product));
+    return createdProductId;
   }
 
   @DeleteMapping("{id}")
@@ -57,6 +62,14 @@ public class ProductController {
       @PathVariable("id") Integer id,
       @RequestParam("quantity") Integer quantity) {
     productService.changeNumberInStock(id, quantity);
+  }
+
+  @PatchMapping("/discount")
+  public void discountProductById(
+      @RequestParam("id") Integer id,
+      @RequestParam("discountRate") BigDecimal discountRate) {
+    System.out.println("discountProductById");
+    productService.discountProductById(id, discountRate);
   }
 
   @GetMapping("/max_price")
