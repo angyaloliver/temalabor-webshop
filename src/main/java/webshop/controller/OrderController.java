@@ -37,18 +37,18 @@ public class OrderController {
     orderService.deleteOrder(id);
   }
 
-  // @GetMapping("{id}")
+  @GetMapping("{id}")
   public OrderDetails getOrderById(@PathVariable Integer id) {
     return orderService.getOrderById(id);
   }
 
-  @GetMapping
+  @GetMapping("/all")
   public List<OrderDetails> getAllOrders() {
     return orderService.getAllOrders();
   }
 
-  @GetMapping("{id}")
-  public List<OrderDetails> getOneCustomersAllOrders(@PathVariable Integer id) {
-    return orderService.getOneCustomersAllOrders(id);
+  @GetMapping("orders_of/{customerId}")
+  public List<OrderDetails> getOneCustomersAllOrders(@PathVariable Integer customerId) {
+    return orderService.getOneCustomersAllOrders(customerId);
   }
 }
