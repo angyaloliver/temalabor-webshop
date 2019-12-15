@@ -28,7 +28,7 @@ public class CustomerService implements UserDetailsService {
 
   public void createCustomer(CustomerContact cc) {
     cc.setPassword(this.bCryptPasswordEncoder.encode(cc.getPassword()));
-    cc.setRoles(Arrays.asList(roleRepository.findByName("ROLE_ADMIN")));
+    cc.setRoles(Arrays.asList(roleRepository.findByName("ROLE_USER")));
     customerRepository.save(new Customer(cc));
   }
 
