@@ -1,31 +1,14 @@
 package webshop;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import webshop.model.Address;
-import webshop.model.Customer;
-import webshop.model.CustomerContact;
-import webshop.model.CustomerName;
-import webshop.model.Delivery;
-import webshop.model.DeliveryMethod;
-import webshop.model.OrderDetails;
-import webshop.model.PaymentMethod;
-import webshop.model.Price;
-import webshop.model.Product;
-import webshop.model.ProductCategory;
-import webshop.model.ProductImage;
-import webshop.model.ShoppingCart;
 import webshop.repository.CustomerRepository;
 import webshop.repository.OrderRepository;
 import webshop.repository.ProductCategoryRepository;
 import webshop.repository.ProductRepository;
+import webshop.repository.RoleRepository;
 import webshop.repository.ShoppingCartRepository;
 
 @SpringBootApplication
@@ -41,6 +24,8 @@ public class WebShopApplication implements CommandLineRunner {
   OrderRepository orderRepository;
   @Autowired
   ShoppingCartRepository shoppingCartRepository;
+  @Autowired
+  RoleRepository roleRepository;
 
 
   public static void main(String[] args) {
@@ -49,7 +34,8 @@ public class WebShopApplication implements CommandLineRunner {
 
   @Override
   public void run(String... args) {
-    CustomerName customerName = new CustomerName("John", "Doe");
+    /*
+    CustomerName customerName = new CustomerName("Root2", "Root2");
     LocalDateTime time = LocalDateTime.now();
 
     Address address = new Address("Hungary", "1111", "Budapest", "Váci street 6.");
@@ -57,39 +43,18 @@ public class WebShopApplication implements CommandLineRunner {
     List<Address> addressList = new LinkedList<>();
     addressList.add(address);
 
-    ProductImage image = new ProductImage("https://pcbonlineshop.com/photos/product/4/176/4.jpg",
-        "beats");
-    ArrayList<ProductImage> images = new ArrayList<>();
-    images.add(image);
-
-    ProductCategory category = new ProductCategory("cat7");
-    ArrayList<ProductCategory> categories = new ArrayList<>();
-    categories.add(category);
-
-    Product product = Product.builder()
-        .name("product")
-        .originalPrice(new Price(BigDecimal.valueOf(100), BigDecimal.valueOf(27)))
-        .description("this is a product")
-        .numberInStock(2)
-        .images(images)
-        .build();
-
-    productRepository.save(product);
-
-    category.addProduct(product);
-
-    productCategoryRepository.save(category);
-
-    ShoppingCart shoppingCart = new ShoppingCart();
-
-    shoppingCartRepository.save(shoppingCart);
+    //Role role = new Role("ROLE_ADMIN");
+    //roleRepository.save(role);
 
     CustomerContact customerContact = CustomerContact.builder()
         .name(customerName)
+        .username("root2")
+        .password("root2")
         .emailAddress("email@address.com")
         .billingAddresses(addressList)
         .phoneNumber("+36301111111")
         .registrationDateTime(time)
+        .roles(Arrays.asList(roleRepository.findByName("ROLE_ADMIN")))
         .build();
 
     Customer customer = Customer.builder()
@@ -97,18 +62,7 @@ public class WebShopApplication implements CommandLineRunner {
         .build();
 
     customerRepository.save(customer);
-
-    Delivery delivery = new Delivery(
-        new Address("Germany", "76187", "Karlsruhe", "Nancystraße 24."), DeliveryMethod.DHL);
-
-    OrderDetails details = OrderDetails.builder()
-        .delivery(delivery)
-        .orderDateTime(time)
-        .paymentMethod(PaymentMethod.PayPal)
-        .build();
-
-    //orderRepository.save(details);
-
+    */
   }
 
 }
