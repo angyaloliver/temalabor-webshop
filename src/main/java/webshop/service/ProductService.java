@@ -76,4 +76,11 @@ public class ProductService {
     }
     return max.intValue();
   }
+
+  public void discountProductById(Integer id, BigDecimal discountRate) {
+    Product product = productRepository.getOne(id);
+    product.discount(discountRate);
+
+    productRepository.save(product);
+  }
 }

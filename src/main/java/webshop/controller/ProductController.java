@@ -64,6 +64,14 @@ public class ProductController {
     productService.changeNumberInStock(id, quantity);
   }
 
+  @PatchMapping("/discount")
+  public void discountProductById(
+      @RequestParam("id") Integer id,
+      @RequestParam("discountRate") BigDecimal discountRate) {
+    System.out.println("discountProductById");
+    productService.discountProductById(id, discountRate);
+  }
+
   @GetMapping("/max_price")
   public String getMaxPrice() {
     return Integer.toString(productService.getMaxPrice());
