@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import webshop.model.Product;
 import webshop.model.ProductCategory;
 import webshop.service.ProductCategoryService;
 
@@ -16,6 +17,7 @@ import webshop.service.ProductCategoryService;
 @RestController
 @RequestMapping("categories")
 public class ProductCategoryController {
+
   ProductCategoryService productCategoryService;
 
   @PostMapping
@@ -34,6 +36,12 @@ public class ProductCategoryController {
   public ProductCategory getProductCategoryById(
       @PathVariable Integer id) {
     return productCategoryService.getProductCategoryById(id);
+  }
+
+  @GetMapping("products_of/{category}")
+  public List<Product> getAllProductsOfCategory(
+      @PathVariable String category) {
+    return productCategoryService.getAllProductsOfCategory(category);
   }
 
   @GetMapping

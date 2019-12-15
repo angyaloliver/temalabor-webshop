@@ -1,5 +1,6 @@
 package webshop.service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +62,18 @@ public class ProductService {
     } else {
       return new ArrayList<>();
     }
+  }
+
+  public int getMaxPrice() {
+    List<Product> products = getAllProducts();
+
+    BigDecimal max = BigDecimal.valueOf(0);
+    for (Product product : products) {
+      BigDecimal actPrice = product.getActualPrice();
+      if (max.compareTo(actPrice) < 0) {
+        max = actPrice;
+      }
+    }
+    return max.intValue();
   }
 }

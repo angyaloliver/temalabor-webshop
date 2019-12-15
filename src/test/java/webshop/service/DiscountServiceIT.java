@@ -51,7 +51,9 @@ public class DiscountServiceIT {
     product1 = productRepository.save(product1);
     product2 = productRepository.save(product2);
 
-    ProductCategory productCategory = new ProductCategory("ABC");
+    ProductCategory productCategory = ProductCategory.builder()
+        .name("ABC")
+        .build();
     productCategory.addProduct(product1);
     productCategory.addProduct(product2);
     productCategoryRepository.save(productCategory);
