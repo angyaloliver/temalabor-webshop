@@ -20,7 +20,7 @@ public class CustomerController {
 
   CustomerService customerService;
 
-  @PostMapping
+  @PostMapping("register")
   public void createCustomer(
       @RequestBody CustomerContact customerContact) {
     customerService.createCustomer(customerContact);
