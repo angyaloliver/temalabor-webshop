@@ -18,8 +18,8 @@ public class ProductService {
   @Autowired
   private ProductRepository productRepository;
 
-  public void createProduct(Product product) {
-    productRepository.save(product);
+  public Integer createProduct(Product product) {
+    return productRepository.save(product).getId();
   }
 
   public void deleteProduct(int id) {
