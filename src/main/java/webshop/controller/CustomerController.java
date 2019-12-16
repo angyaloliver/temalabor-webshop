@@ -39,6 +39,12 @@ public class CustomerController {
     return customerService.getCustomerById(id);
   }
 
+  @GetMapping("get_id/{username}")
+  public int getIdByUsername(
+          @PathVariable String username) {
+    return customerService.getIdByUserName(username);
+  }
+
   @GetMapping("email/{email}")
   public Customer getCustomerByEmail(
       @PathVariable String email) {
@@ -56,8 +62,8 @@ public class CustomerController {
     return customerService.getAllCustomers();
   }
 
-  @GetMapping("get_id/{username}")
-  public int getIdByUsername(@PathVariable String username) {
-    return customerService.getCustomerByUsername(username).getId();
-  }
+  //@GetMapping("get_id/{username}")
+  //public int getIdByUsername(@PathVariable String username) {
+  //  return customerService.getCustomerByUsername(username).getId();
+  //}TODO
 }

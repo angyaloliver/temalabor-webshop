@@ -1,5 +1,6 @@
 package webshop.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +41,15 @@ public class CustomerService implements UserDetailsService {
     return customerRepository.getOne(id);
   }
 
-  public Customer getCustomerByUsername(String username) {
-    return customerRepository.findByContact_Username(username);
+  public int getIdByUserName(String username) { //TODO
+    List<Customer> customers = getAllCustomers();
+    Customer customer = new Customer();
+    for (int i = 0; i < customers.size(); i++) {
+      if (customers.get(i).getContact().getUsername().equals(username)) {
+        customer = customers.get(i);
+      }
+    }
+    return customer.getId();
   }
 
   public List<Customer> getAllCustomers() {
