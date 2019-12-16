@@ -2,12 +2,6 @@ package webshop.controller;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-import webshop.model.Delivery;
-import webshop.model.OrderDetails;
-import webshop.model.OrderStatus;
-import webshop.model.PaymentMethod;
-import webshop.service.OrderService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -17,6 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import webshop.model.Delivery;
+import webshop.model.OrderDetails;
+import webshop.model.OrderStatus;
+import webshop.model.PaymentMethod;
+import webshop.service.OrderService;
 
 
 @AllArgsConstructor
@@ -26,11 +25,11 @@ public class OrderController {
 
   OrderService orderService;
 
-  @PostMapping
+  @PostMapping("create_new/{customerId}")
   public void createOrder(
       @PathVariable("customerId") Integer customerId,
-      @RequestBody Delivery delivery){
-      //@RequestBody PaymentMethod paymentMethod)
+      @RequestBody Delivery delivery) {
+    //@RequestBody PaymentMethod paymentMethod)
     orderService.createOrder(customerId, delivery, PaymentMethod.Simple);
   }
 
@@ -56,15 +55,15 @@ public class OrderController {
 
   @PatchMapping("changeStatus/{id}")
   public void changeOrderStatus(
-          @PathVariable("id") Integer orderId,
-          @RequestParam("status") Integer newStatus) {
-    if(newStatus==1) {
+      @PathVariable("id") Integer orderId,
+      @RequestParam("status") Integer newStatus) {
+    if (newStatus == 1) {
       orderService.changeOrderStatus(orderId, OrderStatus.Processing);
     }
-    if(newStatus==2) {
+    if (newStatus == 2) {
       orderService.changeOrderStatus(orderId, OrderStatus.Shipped);
     }
-    if(newStatus==3) {
+    if (newStatus == 3) {
       orderService.changeOrderStatus(orderId, OrderStatus.Deliverd);
     }
   }
