@@ -41,15 +41,8 @@ public class CustomerService implements UserDetailsService {
     return customerRepository.getOne(id);
   }
 
-  public int getIdByUserName(String username) { //TODO
-    List<Customer> customers = getAllCustomers();
-    Customer customer = new Customer();
-    for (int i = 0; i < customers.size(); i++) {
-      if (customers.get(i).getContact().getUsername().equals(username)) {
-        customer = customers.get(i);
-      }
-    }
-    return customer.getId();
+  public Customer getCustomerByUsername(String username) {
+    return customerRepository.findByContact_Username(username);
   }
 
   public List<Customer> getAllCustomers() {

@@ -13,6 +13,12 @@ import webshop.model.Customer;
 import webshop.model.CustomerContact;
 import webshop.model.ShoppingCart;
 import webshop.service.CustomerService;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @AllArgsConstructor
 @RestController
@@ -39,11 +45,10 @@ public class CustomerController {
     return customerService.getCustomerById(id);
   }
 
-  @GetMapping("get_id/{username}")
-  public int getIdByUsername(
-          @PathVariable String username) {
-    return customerService.getIdByUserName(username);
-  }
+    @GetMapping("get_id/{username}")
+    public int getIdByUsername(@PathVariable String username) {
+        return customerService.getCustomerByUsername(username).getId();
+    }
 
   @GetMapping("email/{email}")
   public Customer getCustomerByEmail(
@@ -62,8 +67,4 @@ public class CustomerController {
     return customerService.getAllCustomers();
   }
 
-  //@GetMapping("get_id/{username}")
-  //public int getIdByUsername(@PathVariable String username) {
-  //  return customerService.getCustomerByUsername(username).getId();
-  //}TODO
 }
