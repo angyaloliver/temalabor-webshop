@@ -50,7 +50,7 @@ public class OrderServiceTest {
 
     Assert.assertEquals(customer.numberOfOrders(), 0);
 
-    orderService.createOrder(customerId, 1234, delivery, paymentMethod, 778);
+    orderService.createOrder(customerId, delivery, paymentMethod);
 
     Assert.assertEquals(customer.numberOfOrders(), 1);
   }

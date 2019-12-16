@@ -57,7 +57,7 @@ public class OrderServiceIT {
 
     Assert.assertEquals(product, customer.getShoppingCart().getProducts().iterator().next());
 
-    orderService.createOrder(customerId, 1234, delivery, paymentMethod, 778);
+    orderService.createOrder(customerId, delivery, paymentMethod);
 
     ShoppingCart orderShoppingCart = customer.getOrderDetails().iterator().next().getShoppingCart();
 
