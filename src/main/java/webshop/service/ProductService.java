@@ -50,6 +50,8 @@ public class ProductService {
     productToBeModified.setImages(modifyingProduct.getImages());
     productToBeModified.setProductCategories(modifyingProduct.getProductCategories());
     productToBeModified.setNumberInStock(modifyingProduct.getNumberInStock());
+
+    productRepository.save(productToBeModified);
   }
 
   public List<Product> getAllProducts(Integer pageNumber, Integer pageSize, String sortBy) {

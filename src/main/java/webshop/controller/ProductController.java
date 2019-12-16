@@ -32,6 +32,13 @@ public class ProductController {
     return createdProductId;
   }
 
+  @PatchMapping("/edit/{id}")
+  public void modifyProduct(
+      @PathVariable Integer id,
+      @RequestBody Product product){
+    productService.modifyProduct(id, product);
+  }
+
   @DeleteMapping("{id}")
   public void deleteProduct(
       @PathVariable("id") Integer id) {
