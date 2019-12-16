@@ -37,40 +37,5 @@ public class WebShopApplication implements CommandLineRunner {
     if (roleRepository.findByName("ROLE_ADMIN") == null) {
       roleRepository.save(new Role("ROLE_ADMIN"));
     }
-
-    //addOrders();
-
-  }
-
-  void addOrders(){
-    Customer customer = customerRepository.findByContact_Username("asd2");
-
-    OrderDetails order1 = OrderDetails.builder()
-            .id(11)
-            .customer(customer)
-            .shoppingCart(customer.getShoppingCart())
-            .delivery(new Delivery())
-            .paymentMethod(PaymentMethod.Simple)
-            .orderDateTime(LocalDateTime.now())
-            .status(OrderStatus.Processing)
-            .build();
-
-  OrderDetails order2 = OrderDetails.builder()
-          .id(22)
-          .customer(customer)
-          .shoppingCart(customer.getShoppingCart())
-          .delivery(new Delivery())
-          .paymentMethod(PaymentMethod.Simple)
-          .orderDateTime(LocalDateTime.now())
-          .status(OrderStatus.Processing)
-          .build();
-
-    orderRepository.save(order1);
-    orderRepository.save(order2);
-
-    customer.addOrder(order1);
-    customer.addOrder(order2);
-
-    customerRepository.save(customer);
   }
 }
