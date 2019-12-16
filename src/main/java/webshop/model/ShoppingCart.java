@@ -6,7 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +19,7 @@ public class ShoppingCart {
   @GeneratedValue
   private Integer id;
 
-  @OneToMany(cascade = CascadeType.ALL)
+  @ManyToMany(cascade = CascadeType.ALL)
   private Collection<Product> products = new ArrayList<>();
 
   public void addProduct(Product p) {

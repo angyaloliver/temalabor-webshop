@@ -26,6 +26,10 @@ public class ShoppingCartService {
     ShoppingCart shoppingCart = customerRepository.getOne(customerId).getShoppingCart();
     Product product = productRepository.getOne(productId);
 
+    if (shoppingCart.getProducts().contains(product)) {
+      return;
+    }
+
     shoppingCart.addProduct(product);
     shoppingCartRepository.save(shoppingCart);
   }
